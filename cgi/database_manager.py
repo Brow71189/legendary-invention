@@ -66,6 +66,7 @@ class BetBase(object):
         self.lock_timeout = 5
         self.filelock = Lock()
         self.games = []
+        self._is_readonly = True
 
     def read_config(self):
         try:
@@ -98,9 +99,13 @@ class BetBase(object):
     def delete_user(self):
         pass
     
-    def load_database(self):
+    def load_database(self, readonly=True, writeable=False):
+        self._is_readonly = readonly
+        if writeable:
+            self._is_readonly = False
+            
         self.database_path = os.path.normpath(self.database_path)
-        if os.path.isfile(self.database_path):
+        if os.path.isfile(self.database_path) and not self._is_readonly:
             starttime = time.time()
             while time.time() - starttime < self.lock_timeout:
                 try:
@@ -161,5 +166,11 @@ class BetBase(object):
             usernode.append(ElementTree.Element('tips'))
 
     def save_database(self):
-        self.database_tree.write(self.database_path)
-        self.filelock.release()
+        if not self._is_readonly:
+            self.database_tree.write(self.database_path)
+            try:            
+                self.filelock.release()
+            except:
+                print('Could not release the lock on the database file.')
+        else:
+            raise IOError('Cannot save database because it was opened readonly.')
