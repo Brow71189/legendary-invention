@@ -58,6 +58,9 @@ class Lock(object):
             return False
 
 class BetBase(object):
+    _fields = {'month': 'Month', 'day': 'Day', 'time': 'Time', 'team1': 'Team1', 'team2': 'Team2', 'name1': 'FullName1',
+               'name2': 'FullName2', 'timeformat': '%H:%M'}
+    
     def __init__(self, **kwargs):
         self.gameslist_path = 'gameslist.txt'
         self.database_path = 'betbase.xml'
@@ -72,11 +75,11 @@ class BetBase(object):
         try:
             configfile = open(os.path.join(os.path.dirname(sys.argv[0]), 'manager.conf'))
         except (IOError, OSError):
-            print('Could not find config file. Make sure it is in the same folder as the script and is called ' + 
-                  '"manager.conf"!')
-            return
+            raise IOError('Could not find config file. Make sure it is in the same folder as the script and is ' + 
+                  'called "manager.conf"!')
         
         for line in configfile:
+            line = line.strip()
             if line.startswith('#'):
                 continue
             
@@ -87,16 +90,100 @@ class BetBase(object):
                 except AttributeError:
                     print('Parameter ' + splitline[0].strip() + ' is not known. It will be ignored.')
                     
-    def read_games_list(self):
+        configfile.close()
+                    
+    def read_games_list(self, separator='\t'):
+        try:
+            gameslist_file = open(os.path.abspath(self.gameslist_path))
+        except (IOError, OSError):
+            raise IOError('Could not find gameslist file. Make sure the path you entered is correct (' +
+                          self.gameslist_path + ')!')
+        fieldnames = []
+        for line in gameslist_file:
+            line = line.strip()
+            if line.startswith('#'):
+                continue
+            elif line.startswith(';'):
+                line = line[1:].strip()
+                splitline = line.split(separator)
+                for element in splitline:
+                    element = element.strip()
+                    fieldnames.append(element)
+            else:
+                splitline = line.split(separator)
+                if len(fieldnames) > 0 and len(splitline) == len(fieldnames):
+                    game = {}
+                    for i in range(len(splitline)):
+                        game[fieldnames[i]] = splitline(i).strip()
+                    game['id'] = self.create_game_id(game)
+                    self.games.append(game)
+        
+        gameslist_file.close()
+    
+    def create_game_id(self, game):
+        team1 = min(game[self._fields['team1']], game[self._fields['team2']])
+        team2 = max(game[self._fields['team1']], game[self._fields['team2']])
+        return game[self._fields['month']] + game[self._fields['day']] + team1 + team2
+    
+    def delete_game(self, *args):
+        if len(args) != 1 and len(args) != 4:
+            raise ValueError('At least 1 argument is required. A single argument is interpreted as game id. ' + 
+                             'Multiple argument must be Month, Day, Team1, Team2.')
+        if self.database_tree is None:
+            self.read_config()
+            self.load_database(writeable=True)
+        if len(args) == 4:
+            game = {self._fields['month']: args[0], self._fields['day']: args[1], self.fields['team1']: args[2]}
+            gameid = self.create_game_id(game)
+        else:
+            gameid = args[0]
+        
+        games = self.database_tree.getroot().find('games')
+        try:
+            games.remove(games.find(gameid))
+        except TypeError:
+            raise RuntimeError('A game with this identificator could not be found in the database '  + str(args) + '.')
+        
+        self.save_database()
+            
+    
+    def delete_user(self, name):
+        if self.database_tree is None:
+            self.read_config()
+            self.load_database(writeable=True)
+        
+        users = self.database_tree.getroot().find('users')
+        try:        
+            users.remove(users.find(name))
+        except TypeError:
+            raise RuntimeError('A user ' + name + 'could not be found in the database.')
+            
+        self.save_database()
+    
+    def update_points(self):
         pass
     
-    def create_game_id(self):
+    def update_ranks(self):
         pass
     
-    def delete_game(self):
+    def add_game_result(self, *args):
         pass
     
-    def delete_user(self):
+    def add_tipp(self, tipp, user):
+        pass
+    
+    def get_user_info(self, name):
+        if self.database_tree is None:
+            self.read_config()
+            self.load_database()
+        
+        user = self.database_tree.getroot().find('users').find(name)
+        if user is None:
+            raise RuntimeError('A user ' + name + 'could not be found in the database.')
+            
+            
+    
+    def get_game_info(self, *game):
         pass
     
     def load_database(self, readonly=True, writeable=False):
@@ -167,6 +254,7 @@ class BetBase(object):
 
     def save_database(self):
         if not self._is_readonly:
+            self.database_tree.getroot().set('last_updated', time.strftime('%Y_%m_%d_%H_%M'))
             self.database_tree.write(self.database_path)
             try:            
                 self.filelock.release()
