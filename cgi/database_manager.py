@@ -146,7 +146,6 @@ class BetBase(object):
         
         self.save_database()
             
-    
     def delete_user(self, name):
         if self.database_tree is None:
             self.read_config()
