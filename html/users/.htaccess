@@ -1,0 +1,8 @@
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /home/giacomo/legendary.pass
+Require valid-user
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !/users/.+/
+RewriteCond %{REMOTE_USER} (.+)
+RewriteRule (.*) /users/%1/$1 [L,R=302]
