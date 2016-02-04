@@ -7,7 +7,8 @@
 <body>
   <a href="admin/" title="restricted area">Logged in as Giacomo</a>
   <div id="wrapper">
-  <h1>RANKING TABLE FOR <?php exec('/php_test.py GIACOMO'); ?></h1>
+  <h1>RANKING TABLE F0R <?php system(dirname(__FILE__).'/../../cgi/php_test.py '.dirname(__FILE__)); ?></h1>
+  
   <table border="1" id="keywords" cellspacing="0" cellpadding="0">
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout.js?t=1"></script>
