@@ -1,5 +1,8 @@
 # Matches overview
 # A line starting with a semicolon specifies the field names
-; date	team1	team2 name1 name2
-06-10T21:00	FRA	ROU	France	Romania
-
+; date	team1	team2	name1	name2	score1	score2
+01-10T21:00	FRA	ROU	France	Romania	2	1
+01-11T15:00	ALB	SUI	Albania	Suisse	0	0
+01-11T18:00	WAL	SVK	Wales	Slovakia	0	1
+01-11T21:00	ENG	RUS	England	Russia	3	0
+01-12T15:00 TUR	CRO	Turkey	Croatia	0	2

@@ -62,14 +62,8 @@ class Lock(object):
             return False
 
 class BetBase(object):
-    # A user element will have the user name as tag and the following subelements
-    user_elements = ['points', 'rank', 'tips']
-    # A game element will have the game id as tag and the following attributes
-    game_attributes = ['date', 'team1', 'team2', 'name1', 'name2', 'result']
-    # A tip element will have a game id as tag and the following attributes
-    tip_attributes = ['result']
     # Time format in gamelist. It is used to convert the string representing the time to seconds since epoch for saving
-    time_format = ['%m-%dT%H:%M']
+    time_format = '%m-%dT%H:%M'
     # Map all above elements and attributes to names used in the code. It is a dictionary where each key is an element
     # or attribute from the input, the respective value is the name as used in the code
     names = {'points': 'points', 'rank': 'rank', 'tips': 'tips', 'tipps': 'tips', 'date': 'date', 'team1': 'team1',
@@ -109,7 +103,7 @@ class BetBase(object):
 
         configfile.close()
 
-    def read_games_list(self, separator='\t'):
+    def read_games_list(self, separator=None):
         try:
             gameslist_file = open(os.path.abspath(self.gameslist_path))
         except (IOError, OSError):
@@ -132,7 +126,7 @@ class BetBase(object):
                     game = {}
                     for i in range(len(splitline)):
                         if self.names.get(fieldnames[i]):
-                            game[self.names[fieldnames[i]]] = splitline(i).strip()
+                            game[self.names[fieldnames[i]]] = splitline[i].strip()
                     game['id'] = self.create_game_id(game)
                     self.games.append(game)
 
@@ -141,7 +135,11 @@ class BetBase(object):
     def create_game_id(self, game):
         team1 = min(game['team1'], game['team2'])
         team2 = max(game['team1'], game['team2'])
-        return game['month'] + game['day'] + team1 + team2
+        if game.get('date'):
+            date = time.strptime(game['date'], self.time_format)
+            return team1 + team2 + '{:02d}{:02d}'.format(date.tm_mon, date.tm_mday)
+        elif game.get('month') and game.get('day'):
+            return  team1 + team2 + '{:02d}{:02d}'.format(game['month'], game['day'])
 
     def delete_game(self, *game):
         gamenode = self.get_gamenode(*game, writeable=True)
@@ -179,11 +177,12 @@ class BetBase(object):
                     points += 3
                 elif sign(tipscore1 - tipscore2) == sign(gamescore1 - gamescore2):
                     points += 1
+            
             pointsnode = user.find('points')
             if pointsnode is None:
                 pointsnode = ElementTree.Element('points')
                 user.append(pointsnode)
-            pointsnode.text = points
+            pointsnode.text = str(points)
 
         self._update_ranks()
         self.save_database()
@@ -192,17 +191,19 @@ class BetBase(object):
         users = self.database_tree.getroot().find('users')
         sortedusers = sorted(users, key=lambda usernode: int(usernode.findtext('points', default=0)), reverse=True)
         for i in range(len(sortedusers)):
-            sortedusers[i].find('rank').text = i+1
+            rank = sortedusers[i].find('rank')
+            if rank is None:
+                rank = ElementTree.Element('rank')
+                sortedusers[i].append(rank)
+            rank.text = str(i+1)
 
     def add_game_result(self, score1, score2, *game):
         gamenode = self.get_gamenode(*game, writeable=True)
-        gamenode.set('score1', score1)
-        gamenode.set('score2', score2)
-
+        gamenode.set('score1', str(score1))
+        gamenode.set('score2', str(score2))
 
     def add_tip(self, name, *tip):
         usernode = self.get_usernode(name, writeable=True)
-
         if len(tip) == 6:
             gameid = self.create_game_id({'month': tip[0], 'day': tip[1], 'team1': tip[2], 'team2': tip[3]})
         elif len(tip) == 3:
@@ -212,10 +213,11 @@ class BetBase(object):
                              ' score team1 and score team2. 6 arguments must be month, day, team1, team2, score team1' +
                              ' and score team2')
 
-        tipnode = ElementTree.Element(gameid, attrib={'score1': tip[-2], 'score2': tip[-1]})
+        tipnode = ElementTree.Element(gameid, attrib={'score1': str(tip[-2]), 'score2': str(tip[-1])})
         tips = usernode.find('tips')
         if tips is None:
-            tips = usernode.append(ElementTree.Element('tips'))
+            tips = ElementTree.Element('tips')
+            usernode.append(tips)
 
         tips.append(tipnode)
 
@@ -230,31 +232,44 @@ class BetBase(object):
 
         return usernode
 
-    def get_user_info(self, name):
-        usernode = self.get_usernode(name)
+    def get_user_info(self, user):
+        if isinstance(user, ElementTree.Element):
+            usernode = user
+        else:
+            usernode = self.get_usernode(user)
         return_dict = {}
         for element in usernode:
             if element.tag == 'tips':
-                tips = []
+                tips = {}
                 for tip in element:
-                    tips.append({'id': tip.tag})
-                    tips[-1].update(tip.attrib)
+                    tips[tip.tag] = tip.attrib
                 return_dict['tips'] = tips
             else:
                 return_dict[element.tag] = element.text
 
         return return_dict
-
+        
+    def get_all_users_info(self):
+        if self.database_tree is None:
+            self.load_database()
+        infolist = []
+        for user in self.database_tree.getroot().find('users'):
+            info = self.get_user_info(user)
+            info['name'] = user.tag
+            infolist.append(info)
+        
+        return infolist
+        
     def get_gamenode(self, *game, **kwargs):
         if self.database_tree is None or ((kwargs.get('writeable') or not kwargs.get('readonly', True)) and
                                            self._is_readonly):
             self.load_database(**kwargs)
-
         if len(game) == 4:
             game = {'month': game[0], 'day': game[1], 'team1': game[2], 'team2': game[3]}
             game_id = self.create_game_id(game)
         elif len(game) == 1:
             game_id = game[0]
+        else:
             raise ValueError('Wrong number of arguments (must be 1 or 4). A single argument is interpreted as ' +
                              'game id. Multiple argument must be Month, Day, Team1, Team2.')
 
@@ -265,8 +280,22 @@ class BetBase(object):
         return gamenode
 
     def get_game_info(self, *game):
-        gamenode = self.get_gamenode(*game)
+        if isinstance(game[0], ElementTree.Element):
+            gamenode = game[0]
+        else:
+            gamenode = self.get_gamenode(*game)
         return gamenode.attrib
+
+    def get_all_games_info(self):
+        if self.database_tree is None:
+            self.load_database()
+        infolist = []
+        for game in self.database_tree.getroot().find('games'):
+            info = self.get_game_info(game)
+            info['id'] = game.tag
+            infolist.append(info)
+        
+        return infolist
 
     def load_database(self, readonly=True, writeable=False):
         try:
@@ -296,13 +325,13 @@ class BetBase(object):
 
     def update_games(self):
         for game in self.games:
-            game_id = game.pop['id']
+            game_id = game.pop('id')
             try:
                 gamenode = self.get_gamenode(game_id, writeable=True)
             except (RuntimeError, AttributeError):
                 gamenode = self.add_gamenode(game_id)
             
-            for key, value in game:
+            for key, value in game.items():
                 gamenode.set(key, value)
 
     def add_gamenode(self, *game):
@@ -314,12 +343,14 @@ class BetBase(object):
             game_id = self.create_game_id(game)
         elif len(game) == 1:
             game_id = game[0]
+        else:
             raise ValueError('Wrong number of arguments (must be 1 or 4). A single argument is interpreted as ' +
                              'game id. Multiple argument must be Month, Day, Team1, Team2.')
                              
-        games = self.database_tree.getroot.find('games')
+        games = self.database_tree.getroot().find('games')
         if games is None:
-            games = self.database_tree.getroot().append(ElementTree.Element('games'))
+            games = ElementTree.Element('games')
+            self.database_tree.getroot().append(games)
         gamenode = games.find(game_id)
         if gamenode is not None:
             raise RuntimeError('A game with the same id already exists (' + str(game) + ').')
@@ -339,33 +370,14 @@ class BetBase(object):
         
         users = self.database_tree.getroot().find('users')
         if users is None:
-            users = self.database_tree.getroot().append(ElementTree.Element('users'))
+            users = ElementTree.Element('users')
+            self.database_tree.getroot().append(users)
         usernode = users.find(name)
         if usernode is not None:
             raise RuntimeError('A user ' + name + 'exists already in the database.')
         usernode = ElementTree.Element(name)
         users.append(usernode)
         
-        return usernode
-        
-        
-    def get_or_add_user(self, user=None):
-        if self.database_tree is None:
-            self.load_database()
-
-        users = self.database_tree.getroot().find('users')
-        if users is None:
-            users = ElementTree.Element('users')
-            self.database_tree.getroot().append(users)
-
-        usernode = users.find(user)
-        if usernode is None:
-            usernode = ElementTree.Element(user)
-            users.append(usernode)
-            for element in self.user_elements:
-                if usernode.find(self.names[element]) is None:
-                    usernode.append(ElementTree.Element(self.names[element]))
-
         return usernode
 
     def save_database(self):
