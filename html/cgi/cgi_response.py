@@ -86,7 +86,7 @@ def create_detailed_table():
                 """<img width="25em" src="images/flags/""" + gameslist[i].get('team1', '') + """.png" title=\"""" + 
                 gameslist[i].get('name1', '') + """\">""" + gameslist[i].get('team1', '') + """-""" +
                 gameslist[i].get('team2', '') +
-                """<img width="25em" src="images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
+                """<img width="25em" src="../images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
                 gameslist[i].get('name2', '') + """\">""" + 
                 """</td>
                 <td>""" + 

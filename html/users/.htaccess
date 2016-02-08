@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Restricted Access"
-AuthUserFile /home/giacomo/legendary.pass
+AuthUserFile /home/pi/legendary.pass
 Require valid-user
 RewriteEngine On
 RewriteCond %{REQUEST_URI} !/users/.+/

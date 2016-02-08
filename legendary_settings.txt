@@ -1,4 +1,13 @@
 1) install apache2
 2) modify apache2.conf as on my computer
 3) PROBABLY NOT NEEDED: sudo apt-get install php5-cli (and php -v to check which version)
-4) sudo apt-get install php5 libapache2-mod-php5 (and test if it's running with: a2query -m php5, otherwise sudo a2enmod php5, and restart apache)
+4) copy legendary.pass to home folder
+5) set right permission for html folder (755)
+6) sudo apt-get install php5 libapache2-mod-php5 (and test if it's running with: a2query -m php5, otherwise sudo a2enmod php5, and restart apache)
+7)sudo a2enmod rewrite
+8) right permissions for password file
+
+
+THINGS THAT MIGHT DEPEND ON SERVER:
+
+1) in database.manager.py specify path for self.database_path

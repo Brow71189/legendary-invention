@@ -72,7 +72,7 @@ class BetBase(object):
 
     def __init__(self, **kwargs):
         self.gameslist_path = 'gameslist.txt'
-        self.database_path = '/home/giacomo/a/stuff/legendary-invention/html/cgi/betbase.xml'
+        self.database_path = '/var/www/html/cgi/betbase.xml'
         self.user = kwargs.get('user', {})
         self.database_tree = None
         self.lock_timeout = 5
