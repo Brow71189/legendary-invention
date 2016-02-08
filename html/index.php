@@ -7,7 +7,7 @@
 <body>
   <img width="34em" src="/images/lock.png" alt="lock.png">
   <a href="/users/" title="Log in">Log in to bet!</a>
-  <div id="wrapper">
+
   <h1>RANKING TABLE</h1>
   
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_ranking_table'); ?>
@@ -16,6 +16,6 @@
   
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_detailed_table'); ?>
 
- </div> 
+
 </body>
 </html>
