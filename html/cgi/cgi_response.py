@@ -1,4 +1,6 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
 Created on Sun Feb  7 10:40:41 2016
 
@@ -55,7 +57,7 @@ def create_detailed_table():
                 <th>Result</th>""")
     for user in userlist:
         print("""\
-                <th>""" + user.get('name', 'unknown')
+                <th>""" + user.get('name', 'unknown') + """</th>"""
               )
               
     print("""

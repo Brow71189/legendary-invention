@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="legend.css" type="text/css">
 </head>
 <body>
-  <img width="34em" src="lock.png" alt="lock.png">
+  <img width="34em" src="/images/lock.png" alt="lock.png">
   <a href="/users/" title="Log in">Log in to bet!</a>
   <div id="wrapper">
   <h1>RANKING TABLE</h1>
