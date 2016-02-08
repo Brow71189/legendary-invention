@@ -16,15 +16,17 @@ class Lock(object):
         if file is not None:
             file = os.path.normpath(file)
         self.file = file
+        self._lock_expire_time = 3600
 
     def acquire(self, file=None, timeout=5):
         if file is not None:
-            self.file = file
+            self.file = os.path.normpath(file)
         if self.file is None:
             raise OSError('No File to lock.')
         starttime = time.time()
         while time.time() - starttime < timeout:
-            if not os.path.isfile(self.file+'.lock'):
+            if (not os.path.isfile(self.file + '.lock') or
+                    time.time() - os.path.getmtime(self.file + '.lock') > self._lock_expire_time):
                 break
         else:
             raise OSError('Could not get a lock on file before timeout because it is already locked.')
@@ -62,13 +64,13 @@ class Lock(object):
             return False
 
 class BetBase(object):
-    # Time format in gamelist. It is used to convert the string representing the time to seconds since epoch for saving
+    # Time format in gamelist. It is used to convert the string representing the time.
     time_format = '%m-%dT%H:%M'
-    # Map all above elements and attributes to names used in the code. It is a dictionary where each key is an element
+    # Map all elements and attributes to names used in the code. It is a dictionary where each key is an element
     # or attribute from the input, the respective value is the name as used in the code
     names = {'points': 'points', 'rank': 'rank', 'tips': 'tips', 'tipps': 'tips', 'date': 'date', 'team1': 'team1',
              'team2': 'team2', 'name1': 'name1', 'name2': 'name2', 'score1': 'score1',
-              'score2': 'score2'}
+             'score2': 'score2'}
 
     def __init__(self, **kwargs):
         self.gameslist_path = 'gameslist.txt'
@@ -86,11 +88,11 @@ class BetBase(object):
             configfile = open(os.path.join(os.path.dirname(sys.argv[0]), 'manager.conf'))
         except (IOError, OSError):
             raise OSError('Could not find config file. Make sure it is in the same folder as the script and is ' +
-                  'called "manager.conf"!')
+                          'called "manager.conf"!')
 
         for line in configfile:
             line = line.strip()
-            if line.startswith('#'):
+            if line.startswith('#') or line.startswith(';'):
                 continue
 
             splitline = line.split(':', 1)
@@ -167,7 +169,7 @@ class BetBase(object):
             for tip in tips:
                 game = games.find(tip.tag)
                 if (game is None or game.get('date', default='z') > currenttime or game.get('score1') is None or
-                    game.get('score2') is None or tip.get('score1') is None or tip.get('score2') is None):
+                        game.get('score2') is None or tip.get('score1') is None or tip.get('score2') is None):
                     continue
                 tipscore1 = int(tip.get('score1'))
                 tipscore2 = int(tip.get('score2'))
@@ -177,7 +179,7 @@ class BetBase(object):
                     points += 3
                 elif sign(tipscore1 - tipscore2) == sign(gamescore1 - gamescore2):
                     points += 1
-            
+
             pointsnode = user.find('points')
             if pointsnode is None:
                 pointsnode = ElementTree.Element('points')
@@ -202,7 +204,7 @@ class BetBase(object):
         gamenode.set('score1', str(score1))
         gamenode.set('score2', str(score2))
 
-    def add_tip(self, name, *tip):
+    def add_or_update_tip(self, name, *tip):
         usernode = self.get_usernode(name, writeable=True)
         if len(tip) == 6:
             gameid = self.create_game_id({'month': tip[0], 'day': tip[1], 'team1': tip[2], 'team2': tip[3]})
@@ -219,11 +221,15 @@ class BetBase(object):
             tips = ElementTree.Element('tips')
             usernode.append(tips)
 
+        oldtip = tips.find(gameid)
+        if oldtip is not None:
+            tips.remove(oldtip)
+
         tips.append(tipnode)
 
     def get_usernode(self, name, **kwargs):
-        if self.database_tree is None or ((kwargs.get('writeable') or not kwargs.get('readonly', True)) and
-                                           self._is_readonly):
+        if (self.database_tree is None or
+                ((kwargs.get('writeable') or not kwargs.get('readonly', True)) and self._is_readonly)):
             self.load_database(**kwargs)
 
         usernode = self.database_tree.getroot().find('users').find(name)
@@ -248,7 +254,7 @@ class BetBase(object):
                 return_dict[element.tag] = element.text
 
         return return_dict
-        
+
     def get_all_users_info(self):
         if self.database_tree is None:
             self.load_database()
@@ -257,12 +263,12 @@ class BetBase(object):
             info = self.get_user_info(user)
             info['name'] = user.tag
             infolist.append(info)
-        
+
         return infolist
-        
+
     def get_gamenode(self, *game, **kwargs):
-        if self.database_tree is None or ((kwargs.get('writeable') or not kwargs.get('readonly', True)) and
-                                           self._is_readonly):
+        if (self.database_tree is None or
+                ((kwargs.get('writeable') or not kwargs.get('readonly', True)) and self._is_readonly)):
             self.load_database(**kwargs)
         if len(game) == 4:
             game = {'month': game[0], 'day': game[1], 'team1': game[2], 'team2': game[3]}
@@ -294,7 +300,7 @@ class BetBase(object):
             info = self.get_game_info(game)
             info['id'] = game.tag
             infolist.append(info)
-        
+
         return infolist
 
     def load_database(self, readonly=True, writeable=False):
@@ -330,7 +336,7 @@ class BetBase(object):
                 gamenode = self.get_gamenode(game_id, writeable=True)
             except (RuntimeError, AttributeError):
                 gamenode = self.add_gamenode(game_id)
-            
+
             for key, value in game.items():
                 gamenode.set(key, value)
 
@@ -346,7 +352,7 @@ class BetBase(object):
         else:
             raise ValueError('Wrong number of arguments (must be 1 or 4). A single argument is interpreted as ' +
                              'game id. Multiple argument must be Month, Day, Team1, Team2.')
-                             
+
         games = self.database_tree.getroot().find('games')
         if games is None:
             games = ElementTree.Element('games')
@@ -356,18 +362,18 @@ class BetBase(object):
             raise RuntimeError('A game with the same id already exists (' + str(game) + ').')
         gamenode = ElementTree.Element(game_id)
         games.append(gamenode)
-        
+
         return gamenode
-    
+
     def add_usernode(self, name=None):
         if name is None:
             name = self.user
         if name is None:
             return
-            
+
         if self.database_tree is None or self._is_readonly:
             self.load_database(writeable=True)
-        
+
         users = self.database_tree.getroot().find('users')
         if users is None:
             users = ElementTree.Element('users')
@@ -377,7 +383,7 @@ class BetBase(object):
             raise RuntimeError('A user ' + name + 'exists already in the database.')
         usernode = ElementTree.Element(name)
         users.append(usernode)
-        
+
         return usernode
 
     def save_database(self):
