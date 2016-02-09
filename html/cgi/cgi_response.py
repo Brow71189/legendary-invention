@@ -13,6 +13,7 @@ import time
 
 def create_ranking_table():
     manager = database_manager.BetBase()
+    manager.read_config()
     userlist = manager.get_all_users_info()
     print("""
     <table border="1" id="keywords" cellspacing="0" cellpadding="0">
@@ -43,6 +44,7 @@ def create_ranking_table():
 
 def create_detailed_table():
     manager = database_manager.BetBase()
+    manager.read_config()
     userlist = manager.get_all_users_info()
     userlist = sorted(userlist, key=lambda user: user.get('name', 'z'))
     gameslist = manager.get_all_games_info()
