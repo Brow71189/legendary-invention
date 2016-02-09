@@ -11,3 +11,7 @@
 THINGS THAT MIGHT DEPEND ON SERVER:
 
 1) in database.manager.py specify path for self.database_path
+
+GET USERNAME IN PHP:
+
+One can use "$_SERVER['PHP_AUTH_USER']" in order to find the current user logged in with htaccess
