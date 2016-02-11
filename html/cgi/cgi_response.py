@@ -17,16 +17,16 @@ def create_ranking_table():
     userlist = manager.get_all_users_info()
     print("""
     <table border="1" id="keywords" cellspacing="0" cellpadding="0">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout.js?t=1"></script>
-    <script src="http://tablesorter.com/__jquery.tablesorter.min.js"></script>
-    <script src="//codepen.io/assets/editor/live/css_live_reload_init.js"></script>
-    <script>$(function () {    $('#keywords').tablesorter();});//# sourceURL=pen.js</script>
+    <script type="text/javascript">
+	$(function(){
+  	$('#keywords').tablesorter(); 
+	});
+    </script>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Points</th>
-                    <th>Ranking</th>
+                    <th><span>Name</span></th>
+                    <th><span>Points</span></th>
+                    <th><span>Ranking</span></th>
                 </tr>
             </thead>
         <tbody>""")

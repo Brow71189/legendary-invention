@@ -3,6 +3,8 @@
 <head>
   <title>Legendary Invention</title>
   <link rel="stylesheet" href="legend.css" type="text/css">
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 </head>
 <body>
   <img width="34em" src="/images/lock.png" alt="lock.png">

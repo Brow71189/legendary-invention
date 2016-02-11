@@ -1,6 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Amarante');
-
-/*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 1;
@@ -14,10 +13,9 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}*/
+}
 html { overflow-y: scroll; }
 body { 
-  /*background: #eee url('http://i.imgur.com/eeQeRmk.png'); /* http://subtlepatterns.com/weave/ */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 100%;
   line-height: 1;
@@ -50,7 +48,11 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 strong, b { font-weight: bold; } 
 
 table { border-collapse: collapse; border-spacing: 0; }
-img { border: 0; max-width: 100%; }
+img {
+  border: 10px;
+  max-width: 100%;
+  padding: 2px;
+ }
 
 h1 { 
   font-family: 'Amarante', Tahoma, sans-serif;
@@ -85,14 +87,25 @@ h1 {
 }
 #keywords thead tr th { 
   font-weight: bold;
-  padding: 12px 20px;
+  padding: 12px 30px;
+  padding-left: 42px;
   }
-#keywords thead tr th { 
+#keywords thead tr th span { 
   padding-right: 20px;
   background-repeat: no-repeat;
-  background-position: 100% 100%;
+  background-position: 100% 70%;
 }
 
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+  background: #acc8dd;
+}
+
+#keywords thead tr th.headerSortUp span {
+  background-image: url('up-arrow.png');
+}
+#keywords thead tr th.headerSortDown span {
+  background-image: url('down-arrow.png');
+}
 
 
 #keywords tbody tr { 
@@ -114,19 +127,23 @@ h1 {
 #detailed thead tr th{
   background: #c2dfc0;
   font-weight: bold;
-  padding: 15px 30px;
+  padding: 10px 25px;
 
 }
 
 #detailed tr th { 
-  padding: 10px 15px;
+  padding: 10px 25px;
   vertical-align: middle;
   white-space:pre
 }
 
 #detailed tr td { 
-  padding: 10px 45px;
+  padding: 10px;
+  text-align: center;
   vertical-align: middle;
 }
 
 
+#detailed td {
+   white-space: nowrap;
+}
