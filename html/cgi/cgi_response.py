@@ -19,7 +19,7 @@ def create_ranking_table():
     <table border="1" id="keywords" cellspacing="0" cellpadding="0">
     <script type="text/javascript">
 	$(function(){
-  	$('#keywords').tablesorter(); 
+  	$('#keywords').tablesorter({sortList:[[2,0]]}); 
 	});
     </script>
             <thead>
