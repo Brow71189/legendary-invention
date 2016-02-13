@@ -147,3 +147,33 @@ h1 {
 #detailed td {
    white-space: nowrap;
 }
+
+#betting {
+  margin: 0 auto;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+
+#betting thead tr th{
+  background: #c2dfc0;
+  font-weight: bold;
+  padding: 10px 25px;
+
+}
+
+#betting tr th { 
+  padding: 10px 25px;
+  vertical-align: middle;
+  white-space:pre
+}
+
+#betting tr td { 
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#betting td {
+   white-space: nowrap;
+}
