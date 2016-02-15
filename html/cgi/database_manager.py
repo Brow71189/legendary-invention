@@ -234,7 +234,7 @@ class BetBase(object):
 
         usernode = self.database_tree.getroot().find('users').find(name)
         if usernode is None:
-            raise RuntimeError('A user ' + name + 'could not be found in the database.')
+            raise RuntimeError('A user ' + name + ' could not be found in the database.')
 
         return usernode
 
