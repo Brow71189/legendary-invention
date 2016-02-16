@@ -5,11 +5,11 @@
   <link rel="stylesheet" href="../../legend.css" type="text/css">
  </head>
 <body>
-  Logged in as giacomo
+  Logged in as <?php $_SERVER['PHP_AUTH_USER'];?>
 
   <h1>PLACE YOUR BETS!</h1>
   
- <?php system(dirname(__FILE__).'/../../cgi/cgi_response.py '.'-f create_betting_table'); ?>
+ <?php system(dirname(__FILE__).'/../../cgi/cgi_response.py '.'-f create_betting_table'.'-u '.$_SERVER['PHP_AUTH_USER']); ?>
 
 
  

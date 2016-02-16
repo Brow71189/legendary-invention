@@ -387,6 +387,11 @@ class BetBase(object):
         return usernode
 
     def save_database(self):
+        if not self.database_tree:
+            if not self.quiet:
+                print('No database is open that could be saved.')
+            return
+            
         if not self._is_readonly:
             self.database_tree.getroot().set('last_updated', time.strftime('%Y_%m_%d_%H_%M'))
             self.database_tree.write(self.database_path)

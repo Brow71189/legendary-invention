@@ -10,6 +10,8 @@ Created on Sun Feb  7 10:40:41 2016
 import database_manager
 import argparse
 import time
+import os
+import sys
 
 def create_ranking_table(*args):
     manager = database_manager.BetBase()
@@ -121,7 +123,8 @@ def create_betting_table(*args):
         userinfo = manager.get_user_info(args[0])
         
     print("""
-    <form action="mybets.php" method="post">
+    <form action=\"""" + os.path.join(os.path.dirname(sys.argv[0]), 'submit_bet.py') +
+    """\" method="post" name=\"""" + args[0] + """\">
      <input type="submit" value="Submit"/>
       <table border="1" id="betting" cellspacing="0" cellpadding="0">
         <thead>
@@ -172,14 +175,11 @@ def create_betting_table(*args):
                 """</td>
                 <td>""" + 
                 gameslist[i].get('score1', '') + """-""" + gameslist[i].get('score2', '') + """</td>
-                <td><input type="text" name="score1_""" + str(i) +
+                <td><input type="text" name="score1_""" + gameslist[i].get('id') +
                 """" value=\"""" + score1 + """\" maxlength="1" size="1" """ + disabled + 
-                """/>-<input type="text" name="score2_""" + str(i) + """" value=\"""" + score2 +
-                """\" maxlength="1" size="1" """ + disabled + """/></td>
-
-
-		"""
-                    )
+                """/>-<input type="text" name="score2_""" + gameslist[i].get('id') + """" value=\"""" + score2 +
+                """\" maxlength="1" size="1" """ + disabled + """/></td>"""
+                )
 
         print("""\
             </tr>""")
