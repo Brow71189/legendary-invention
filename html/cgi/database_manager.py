@@ -232,7 +232,7 @@ class BetBase(object):
                 ((kwargs.get('writeable') or not kwargs.get('readonly', True)) and self._is_readonly)):
             self.load_database(**kwargs)
 
-        usernode = self.database_tree.getroot().find('users').find(name)
+        usernode = self.database_tree.getroot().find('users').find(name.lower())
         if usernode is None:
             raise RuntimeError('A user ' + name + ' could not be found in the database.')
 
@@ -370,7 +370,8 @@ class BetBase(object):
             name = self.user
         if name is None:
             return
-
+        name = name.lower()
+        
         if self.database_tree is None or self._is_readonly:
             self.load_database(writeable=True)
 
