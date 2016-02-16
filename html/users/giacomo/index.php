@@ -9,7 +9,7 @@
 
   <h1>PLACE YOUR BETS!</h1>
   
- <?php system(dirname(__FILE__).'/../../cgi/cgi_response.py '.'-f create_betting_table'.'-u '.$_SERVER['PHP_AUTH_USER']); ?>
+ <?php system(dirname(__FILE__).'/../../cgi/cgi_response.py '.'-f create_betting_table'.' -u '.$_SERVER['PHP_AUTH_USER']); ?>
 
 
  
