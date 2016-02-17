@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="../../legend.css" type="text/css">
  </head>
 <body>
-  Logged in as <?php $_SERVER['PHP_AUTH_USER'];?>
+  Logged in as <?php echo $_SERVER['PHP_AUTH_USER'];?>
 
   <h1>PLACE YOUR BETS!</h1>
   
