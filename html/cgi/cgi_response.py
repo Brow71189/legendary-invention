@@ -123,7 +123,7 @@ def create_betting_table(*args):
         userinfo = manager.get_user_info(args[0])
         
     print("""
-    <form action="<?php system(dirname(__FILE__).'/../cgi/submit_bet.py'); ?>" method="post" name=\"""" + args[0] + """\">
+    <form action="submit_bet.php" method="post" name=\"""" + args[0] + """\">
      <input type="submit" value="Submit"/>
       <table border="1" id="betting" cellspacing="0" cellpadding="0">
         <thead>
