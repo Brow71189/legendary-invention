@@ -17,7 +17,7 @@ def process_input(form):
     manager = database_manager.BetBase()
     manager.read_config()
     user = form.name
-    
+   
     for tip in form.keys():
         score1 = score2 = None
         if tip.startswith('score1'):
@@ -41,7 +41,7 @@ def process_input(form):
             
 
 def print_response(form):
-    print("""\
+    print("""/
 <!DOCTYPE html>
 <html>
     <head>
