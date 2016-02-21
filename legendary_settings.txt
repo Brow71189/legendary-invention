@@ -27,5 +27,5 @@ TO USE PYTHON FILES INSTEAD OF HTML OR PHP
 2) Make sure that the script is executable for others (give it at least 755 permissions)
 3) Script file has to start with: "#!/usr/bin/python3"
 4) make sure the first thing printed by the script is: "Content-type:text/html\r\n\r\n"
-5) To use index.py instead of index.html add following to apache2.conf:
+5) To use index.py instead of index.html add following to apache2.conf (maybe you have to add it to mods-enabled/dir.conf in newer apache versions):
 	DirectoryIndex index.html index.php index.py
