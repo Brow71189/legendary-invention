@@ -15,3 +15,15 @@ THINGS THAT MIGHT DEPEND ON SERVER:
 GET USERNAME IN PHP:
 
 One can use "$_SERVER['PHP_AUTH_USER']" in order to find the current user logged in with htaccess
+
+TO USE PYTHON FILES INSTEAD OF HTML OR PHP
+
+1) Add following options for the directory with .py files (either in apache2.conf or sites-availabe/default):
+	<Directory /path/to/directory>
+		Options +ExecCGI
+		AddHandler cgi-script .py
+	</Directory>
+
+2) Make sure that the script is executable for others (give it at least 755 permissions)
+3) Script file has to start with: "#!/usr/bin/python3"
+4) make sure the first thing printed by the script is: "Content-type:text/html\r\n\r\n"
