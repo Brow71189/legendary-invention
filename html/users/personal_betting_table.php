@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Legendary Invention</title>
-  <link rel="stylesheet" href="../../legend.css" type="text/css">
+  <link rel="stylesheet" href="/legend.css" type="text/css">
  </head>
 <body>
   Logged in as <?php echo $_SERVER['PHP_AUTH_USER'];?>

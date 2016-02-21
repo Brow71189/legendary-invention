@@ -10,8 +10,8 @@ Created on Sun Feb  7 10:40:41 2016
 import database_manager
 import argparse
 import time
-import os
-import sys
+#import os
+#import sys
 
 def create_ranking_table(*args):
     manager = database_manager.BetBase()
@@ -64,7 +64,7 @@ def create_detailed_table(*args):
                 <th>""" + user.get('name', 'unknown') + """</th>"""
               )
               
-    print("""
+    print("""\
             </tr>
         </thead>
         <tbody>""")
@@ -87,10 +87,10 @@ def create_detailed_table(*args):
                 time.strftime('%H:%M', time.strptime(gameslist[i].get('date'), manager.time_format)) +
                 """</td>
                 <td>""" + 
-                """<img width="25em" src="images/flags/""" + gameslist[i].get('team1', '') + """.png" title=\"""" + 
+                """<img width="25em" src="/images/flags/""" + gameslist[i].get('team1', '') + """.png" title=\"""" + 
                 gameslist[i].get('name1', '') + """\">""" + gameslist[i].get('team1', '') + """-""" +
                 gameslist[i].get('team2', '') +
-                """<img width="25em" src="../images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
+                """<img width="25em" src="/images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
                 gameslist[i].get('name2', '') + """\">""" + 
                 """</td>
                 <td>""" + 
@@ -123,7 +123,7 @@ def create_betting_table(*args):
         userinfo = manager.get_user_info(args[0])
         
     print("""
-    <form action="submit_bet.php" method="post" name=\"""" + args[0] + """\">
+    <form action="/cgi/submit_bet.py" method="post" name=\"""" + args[0] + """\">
      <input type="submit" value="Submit"/>
       <table border="1" id="betting" cellspacing="0" cellpadding="0">
         <thead>
@@ -166,10 +166,10 @@ def create_betting_table(*args):
                 time.strftime('%H:%M', time.strptime(gameslist[i].get('date'), manager.time_format)) +
                 """</td>
                 <td>""" + 
-                """<img width="25em" src="/../images/flags/""" + gameslist[i].get('team1', '') + """.png" title=\"""" + 
+                """<img width="25em" src="/images/flags/""" + gameslist[i].get('team1', '') + """.png" title=\"""" + 
                 gameslist[i].get('name1', '') + """\">""" + gameslist[i].get('team1', '') + """-""" +
                 gameslist[i].get('team2', '') +
-                """<img width="25em" src="/../images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
+                """<img width="25em" src="/images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
                 gameslist[i].get('name2', '') + """\">""" + 
                 """</td>
                 <td>""" + 
