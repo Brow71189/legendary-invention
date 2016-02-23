@@ -16,7 +16,7 @@ cgitb.enable()
 def process_input(form):
     manager = database_manager.BetBase()
     manager.read_config()
-    user = form.name
+    user = form['name'].value
    
     for tip in form.keys():
         score1 = score2 = None
@@ -41,7 +41,8 @@ def process_input(form):
             
 
 def print_response(form):
-    print("""/
+    print("""\
+Content-type:text/html\r\n\r\n
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,11 +50,12 @@ def print_response(form):
         <link rel="stylesheet" href="/legend.css" type="text/css">
     </head>
     <body>
-        Logged in as """ + form.name + """
+        Logged in as """ + #form['name'].value + """
     
-        <h1>YOUR BETS HAVE BEEN SUCCESSFULLY UPDATED!</h1>""")
+        """<h1>YOUR BETS HAVE BEEN SUCCESSFULLY UPDATED!</h1>""")
     
-    cgi_response.create_betting_table(form.name)
+    #cgi_response.create_betting_table(form['name'].value)
+    print(form.list)
     
     print("""\
     </body>
@@ -63,5 +65,5 @@ def print_response(form):
 
 if __name__ == '__main__':
     form = cgi.FieldStorage()
-    process_input(form)
+#    process_input(form)
     print_response(form)
