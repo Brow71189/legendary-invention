@@ -32,7 +32,7 @@ def process_input(form):
                 score2 = int(score2)
             except:
                 score2 = None
-        if not (score1 and score2):
+        if score1 is None or score2 is None:
             continue
         
         manager.add_or_update_tip(user, game, score1, score2)
