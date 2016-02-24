@@ -176,9 +176,9 @@ def create_betting_table(*args):
                 <td>""" + 
                 gameslist[i].get('score1', '') + """-""" + gameslist[i].get('score2', '') + """</td>
                 <td><input type="text" name="score1_""" + gameslist[i].get('id') +
-                """" value=\"""" + score1 + """\" maxlength="1" size="1" """ + disabled + 
+                """" value=\"""" + score1 + """\" maxlength="2" style="width: 0.5em" """ + disabled + 
                 """/>-<input type="text" name="score2_""" + gameslist[i].get('id') + """" value=\"""" + score2 +
-                """\" maxlength="1" size="1" """ + disabled + """/></td>"""
+                """\" maxlength="2" style="width: 0.5em" """ + disabled + """/></td>"""
                 )
 
         print("""\
