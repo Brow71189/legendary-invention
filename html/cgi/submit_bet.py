@@ -29,7 +29,7 @@ def process_input(form):
                 score1 = None
             score2 = form.getfirst('score2_' + game)
             try:
-                score2 = int(score1)
+                score2 = int(score2)
             except:
                 score2 = None
         if not (score1 and score2):
