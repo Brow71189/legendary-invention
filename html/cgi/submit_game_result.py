@@ -50,12 +50,12 @@ Content-type:text/html\r\n\r\n
     <head>
         <title>Legendary Invention</title>
         <link rel="stylesheet" href="/legend.css" type="text/css">
+        <meta http-equiv="Refresh" content="5;url=/users/admin/">
     </head>
-    <body>
-        Logged in as <?php echo $_SERVER['PHP_AUTH_USER'];?>
-    
-        <h1>GAME RESULTS SUCCESSFULLY UPDATED!</h1>
-        <a href="/" title="Home">Home</a>
+    <body>    
+        <h3>GAME RESULTS SUCCESSFULLY UPDATED!</h3>
+        <br><br>
+        <p>You will be redirected to the admin area in 5 seconds. If not, use the following link:</p>
         <a href="/users/admin/" title="Admin Area">Admin Area</a>
     </body>
 </html>"""
