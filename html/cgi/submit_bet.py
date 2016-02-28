@@ -55,7 +55,18 @@ Content-type:text/html\r\n\r\n
         Logged in as """ + form.getvalue('user') + """
     
         <h1>YOUR BETS HAVE BEEN SUCCESSFULLY UPDATED!</h1>
-        <a href="/" title="Home">Home</a>""")
+	  <div id="header">
+      	 <table id=headertable width=100%>
+                 <tr>
+                     <td align="left"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
+                     <td align="center"><h1>PNM UEFA betting system</h1></td>
+                     <td align="right"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
+                </tr>
+            </table>
+	</div>
+	<div align="right">Logged in as """ + form.getvalue('user') + """</div>
+            
+        <h3>BETS SUCCESSFULLY UPDATED!</h3>""")
     
     cgi_response.create_betting_table(form.getvalue('user'))
     

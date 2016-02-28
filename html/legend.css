@@ -1,4 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Amarante');
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -22,6 +23,7 @@ body {
   color: #585858;
   padding: 22px 10px;
   padding-bottom: 55px;
+  background-color:#d9d9d9;
 }
 
 ::selection { background: #5f74a0; color: #fff; }
@@ -54,10 +56,19 @@ img {
   padding: 2px;
  }
 
-h1 { 
-  font-family: 'Amarante', Tahoma, sans-serif;
+h1 {   
+  font-family: 'Indie Flower';
   font-weight: bold;
   font-size: 3.6em;
+  line-height: 1.7em;
+   margin-bottom: 10px;
+  text-align: center;
+}
+
+h3 {   
+  font-family: 'Indie Flower';
+  font-weight: bold;
+  font-size: 2.5em;
   line-height: 1.7em;
   margin-bottom: 10px;
   text-align: center;
@@ -83,7 +94,7 @@ h1 {
 
 #keywords thead {
   cursor: pointer;
-  background: #c9dff0;
+  background: #ffb3b3;
 }
 #keywords thead tr th { 
   font-weight: bold;
@@ -97,7 +108,7 @@ h1 {
 }
 
 #keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
-  background: #acc8dd;
+  background: #ff8080;
 }
 
 #keywords thead tr th.headerSortUp span {
@@ -125,7 +136,7 @@ h1 {
 
 
 #detailed thead tr th{
-  background: #c2dfc0;
+  background: #ffb3b3;
   font-weight: bold;
   padding: 10px 25px;
 
@@ -176,4 +187,19 @@ h1 {
 
 #betting td {
    white-space: nowrap;
+}
+
+#header {
+    background-color:black;
+    color:white;
+    padding:15px;
+}
+
+#headertable td {
+vertical-align:middle;
+}
+
+#submit {
+width:13em;
+padding:10px;
 }

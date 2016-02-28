@@ -124,7 +124,7 @@ def create_betting_table(*args):
         
     print("""
     <form action="/cgi/submit_bet.py" method="post">
-     <input type="submit" value="Submit"/>
+     <div align="center"><input id="submit" type="image" src="/images/submit.png" value="Submit"/></div>
      <input type="hidden" name="user" value=\"""" + args[0] + """\">
       <table border="1" id="betting" cellspacing="0" cellpadding="0">
         <thead>
@@ -186,6 +186,7 @@ def create_betting_table(*args):
     print("""\
             </tbody>
         </table>
+     <div align="center"><input id="submit" type="image" src="/images/submit.png" value="Submit"/></div>
   </form>"""
       )
       
