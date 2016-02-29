@@ -267,7 +267,7 @@ def create_admin_table(*args):
 
 if __name__ == '__main__':
     _functions = {'create_ranking_table': create_ranking_table, 'create_detailed_table': create_detailed_table,
-                  'create_betting_table': create_betting_table}
+                  'create_betting_table': create_betting_table, 'create_admin_table': create_admin_table}
     
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--user')
