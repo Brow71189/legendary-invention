@@ -52,10 +52,7 @@ Content-type:text/html\r\n\r\n
         <link rel="stylesheet" href="/legend.css" type="text/css">
     </head>
     <body>
-        Logged in as """ + form.getvalue('user') + """
-    
-        <h1>YOUR BETS HAVE BEEN SUCCESSFULLY UPDATED!</h1>
-	  <div id="header">
+         <div id="header">
       	 <table id=headertable width=100%>
                  <tr>
                      <td align="left"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
