@@ -38,10 +38,8 @@ def process_input(form):
         
         manager.add_game_result(score1, score2, game)
     
-    manager.update_points()    
-    manager.save_database()
+    manager.update_points()
             
-
 def print_response(form):
     print("""\
 Content-type:text/html\r\n\r\n
@@ -58,9 +56,7 @@ Content-type:text/html\r\n\r\n
         <p>You will be redirected to the admin area in 5 seconds. If not, use the following link:</p>
         <a href="/users/admin/" title="Admin Area">Admin Area</a>
     </body>
-</html>"""
-        )
-      
+</html>""")
 
 if __name__ == '__main__':
     form = cgi.FieldStorage()
