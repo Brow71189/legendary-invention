@@ -61,9 +61,9 @@ h1 {
   font-weight: bold;
   font-size: 3.6em;
   line-height: 1.7em;
-   margin-bottom: 10px;
+  margin-bottom: 10px;
   text-align: center;
-}
+ }
 
 h3 {   
   font-family: 'Indie Flower';
@@ -74,6 +74,10 @@ h3 {
   text-align: center;
 }
 
+#home {
+color: white;
+text-decoration:none;
+}
 
 /** page structure
 #wrapper {
