@@ -17,7 +17,6 @@ cgitb.enable()
 def process_input(form):
     manager = database_manager.BetBase()
     manager.read_config()
-    user = form.getvalue('user')
    
     for tip in form.keys():
         score1 = score2 = None
@@ -34,11 +33,12 @@ def process_input(form):
             except:
                 score2 = None
         if (score1 is None or score2 is None or
-            time.strftime(manager.time_format) > manager.get_game_info(game).get('date')):
+            time.strftime(manager.time_format) < manager.get_game_info(game).get('date')):
             continue
         
-        manager.add_or_update_tip(user, game, score1, score2)
+        manager.add_game_result(score1, score2, game)
     
+    manager.update_points()    
     manager.save_database()
             
 
@@ -50,27 +50,13 @@ Content-type:text/html\r\n\r\n
     <head>
         <title>Legendary Invention</title>
         <link rel="stylesheet" href="/legend.css" type="text/css">
+        <meta http-equiv="Refresh" content="5;url=/users/admin/">
     </head>
-    <body>
-        Logged in as """ + form.getvalue('user') + """
-    
-        <h1>YOUR BETS HAVE BEEN SUCCESSFULLY UPDATED!</h1>
-	  <div id="header">
-      	 <table id=headertable width=100%>
-                 <tr>
-                     <td align="left"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
-                     <td align="center"><h1>PNM UEFA betting system</h1></td>
-                     <td align="right"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
-                </tr>
-            </table>
-	</div>
-	<div align="right">Logged in as """ + form.getvalue('user') + """</div>
-            
-        <h3>BETS SUCCESSFULLY UPDATED!</h3>""")
-    
-    cgi_response.create_betting_table(form.getvalue('user'))
-    
-    print("""\
+    <body>    
+        <h3>GAME RESULTS SUCCESSFULLY UPDATED!</h3>
+        <br><br>
+        <p>You will be redirected to the admin area in 5 seconds. If not, use the following link:</p>
+        <a href="/users/admin/" title="Admin Area">Admin Area</a>
     </body>
 </html>"""
         )

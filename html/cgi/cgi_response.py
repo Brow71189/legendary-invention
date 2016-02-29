@@ -189,6 +189,80 @@ def create_betting_table(*args):
      <div align="center"><input id="submit" type="image" src="/images/submit.png" value="Submit"/></div>
   </form>"""
       )
+      
+def create_admin_table(*args):
+    manager = database_manager.BetBase()
+    manager.read_config()
+    gameslist = manager.get_all_games_info()
+    gameslist = sorted(gameslist, key=lambda game: game.get('date', 'z'))
+#    userinfo = None
+#    if len(args) > 0:
+#        userinfo = manager.get_user_info(args[0])
+        
+    print("""
+    <form action="/cgi/submit_game_results.py" method="post">
+     <input type="submit" value="Submit"/>
+      <table border="1" id="betting" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Match</th>
+                <th>ID</th>
+                <th>Result</th>
+           </tr>
+        </thead>
+        <tbody>""")
+    for i in range(len(gameslist)):
+#        score1 = score2 = ''
+#        if userinfo and userinfo.get('tips'):
+#            tip = userinfo['tips'].get(gameslist[i].get('id'))
+#            if tip:
+#                score1 = tip.get('score1', '')
+#                score2 = tip.get('score2', '')
+        
+#        disabled = ''
+#        if time.strftime(manager.time_format) > gameslist[i].get('date'):
+#            disabled = 'disabled'
+                
+        print("""\
+            <tr>""")
+            
+        if not (i > 0 and gameslist[i].get('date')[:5] == gameslist[i-1].get('date')[:5]):
+            rowspan=1
+            while i+rowspan < len(gameslist) and gameslist[i+rowspan].get('date')[:5] == gameslist[i].get('date')[:5]:
+                rowspan += 1
+            print("""\
+                <td rowspan=""" + str(rowspan) + """>""" +
+                time.strftime('%B %d', time.strptime(gameslist[i].get('date'), manager.time_format)) +
+                """</td>"""
+                )
+                
+        print("""\
+                <td>""" + 
+                time.strftime('%H:%M', time.strptime(gameslist[i].get('date'), manager.time_format)) +
+                """</td>
+                <td>""" + 
+                """<img width="25em" src="/images/flags/""" + gameslist[i].get('team1', '') + """.png" title=\"""" + 
+                gameslist[i].get('name1', '') + """\">""" + gameslist[i].get('team1', '') + """-""" +
+                gameslist[i].get('team2', '') +
+                """<img width="25em" src="/images/flags/""" + gameslist[i].get('team2', '') + """.png" title=\"""" + 
+                gameslist[i].get('name2', '') + """\">""" + """</td>
+                <td>""" + gameslist[i].get('id', '') + """</td>
+                <td><input type="text" name="score1_""" + gameslist[i].get('id') +
+                """" value=\"""" + gameslist[i].get('score1', '') +
+                """\" maxlength="2" style="width: 2em"/>-<input type="text" name="score2_""" + gameslist[i].get('id') +
+                """" value=\"""" + gameslist[i].get('score2', '') +
+                """\" maxlength="2" style="width: 2em"/></td>"""
+                )
+
+        print("""\
+            </tr>""")
+    print("""\
+            </tbody>
+        </table>
+  </form>"""
+      )
 
 
 if __name__ == '__main__':
