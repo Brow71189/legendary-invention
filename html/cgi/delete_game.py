@@ -36,7 +36,6 @@ if __name__ == '__main__':
     form = cgi.FieldStorage()
     gameid = form.getvalue('gameid')
     manager = database_manager.BetBase()
-    manager.read_config()
     manager.delete_game(gameid)
     manager.update_points()
     manager.save_database()

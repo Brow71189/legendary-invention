@@ -74,7 +74,7 @@ class BetBase(object):
 
     def __init__(self, **kwargs):
         self.gameslist_path = 'gameslist.txt'
-        self.database_path = '/var/www/html/cgi/betbase.xml'
+        self.database_path = 'betbase.xml'
         self.user = kwargs.get('user', {})
         self.database_tree = None
         self.lock_timeout = 5
@@ -397,7 +397,7 @@ class BetBase(object):
             self.database_tree.getroot().set('last_updated', time.strftime('%Y_%m_%d_%H_%M'))
             self.database_tree.write(self.database_path)
             try:
-                self.filelock.release()
+                self.database_path = self.filelock.release()
             except OSError:
                 if not self.quiet:
                     print('Could not release lock on the database file.')
