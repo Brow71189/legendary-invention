@@ -17,10 +17,16 @@
 </table>
 </div>
 <br>
-<div align="right">
-<a href="/users/"><img width="34em" src="/images/lock.png" alt="lock.png" title="Log in"></a>
-<a href="/users/" title="Log in">start betting!</a>
-</div>
+<table width=100%>
+ <tr>
+  <td align="left"><a href="rules.php" title="See betting rules">Betting rules</a></td>
+  <td align="right">
+   <a href="/users/"><img width="34em" src="/images/lock.png" alt="lock.png" title="Log in"></a>
+   <a href="/users/" title="Log in">start betting!</a>
+  </td>
+ </tr>
+</table>
+
   <h3>RANKING TABLE</h3>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_ranking_table'); ?>
   <h3>DETAILED BETTING TABLE</h3>
