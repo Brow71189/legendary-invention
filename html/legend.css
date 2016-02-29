@@ -205,5 +205,6 @@ vertical-align:middle;
 
 #submit {
 width:13em;
-padding:10px;
+position: fixed;
+right:5%;
 }
