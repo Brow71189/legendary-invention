@@ -38,5 +38,4 @@ if __name__ == '__main__':
     manager = database_manager.BetBase()
     manager.delete_game(gameid)
     manager.update_points()
-    manager.save_database()
     print_response(gameid)
