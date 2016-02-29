@@ -44,7 +44,6 @@ def process_input(form):
 
 def print_response(form):
     print("""\
-Content-type:text/html\r\n\r\n
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,6 +73,7 @@ Content-type:text/html\r\n\r\n
       
 
 if __name__ == '__main__':
+    print('Content-type:text/html\r\n\r\n')
     form = cgi.FieldStorage()
     process_input(form)
     print_response(form)

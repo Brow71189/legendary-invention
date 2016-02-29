@@ -16,7 +16,7 @@
 <div align="right">Logged in as <?php echo $_SERVER['PHP_AUTH_USER'];?></div>
 
 	<h3>Admin Area</h3>  
-	<?php system(dirname(__FILE__).'/../cgi/cgi_response.py '.'-f create_admin_table'); ?> 
+	<?php system(dirname(__FILE__).'/../../cgi/cgi_response.py '.'-f create_admin_table'); ?> 
 	<form action="/cgi/update_gameslist.py" method="post">
 		<input type="submit" value="Update Gameslist from Textfile"/>
 	</form>	

@@ -12,7 +12,6 @@ import cgi
 
 def print_response(gameid):
     print("""\
-Content-type:text/html\r\n\r\n
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,6 +31,7 @@ Content-type:text/html\r\n\r\n
 
 
 if __name__ == '__main__':
+    print('Content-type:text/html\r\n\r\n')
     form = cgi.FieldStorage()
     gameid = form.getvalue('gameid')
     manager = database_manager.BetBase()
