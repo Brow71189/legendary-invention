@@ -22,7 +22,7 @@
 	</form>	
 	<form action="/cgi/delete_game.py" method="post">
 		<input type="submit" value="Delete this game"/>
-		<input type="text" name="gameid" maxlength="10" style="width: 10em"/>
+		<input type="text" name="gameid" maxlength="10" style="width: 10em" placeholder="Game ID"/>
 	</form>
  
 </body>
