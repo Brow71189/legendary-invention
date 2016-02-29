@@ -9,7 +9,7 @@ Created on Mon Feb 15 15:40:36 2016
 import cgi
 import cgitb
 import database_manager
-import cgi_response
+#import cgi_response
 import time
 
 cgitb.enable()

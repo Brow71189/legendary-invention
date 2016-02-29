@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Fri Feb 26 18:21:58 2016
@@ -6,12 +7,13 @@ Created on Fri Feb 26 18:21:58 2016
 """
 
 import database_manager
+import cgi
 import cgitb
 cgitb.enable()
-import cgi
 
 def print_response(gameid):
     print("""\
+Content-type:text/html\r\n\r\n
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +33,6 @@ def print_response(gameid):
 
 
 if __name__ == '__main__':
-    print('Content-type:text/html\r\n\r\n')
     form = cgi.FieldStorage()
     gameid = form.getvalue('gameid')
     manager = database_manager.BetBase()

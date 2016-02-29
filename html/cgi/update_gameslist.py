@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Fri Feb 26 18:21:58 2016
@@ -12,7 +13,6 @@ cgitb.enable()
 
 def print_response():
     print("""\
-Content-type:text/html\r\n\r\n
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,6 +32,7 @@ Content-type:text/html\r\n\r\n
 
 
 if __name__ == '__main__':
+    print('Content-type:text/html\r\n\r\n')
     manager = database_manager.BetBase()
     manager.read_config()
     manager.read_games_list()
