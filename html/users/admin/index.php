@@ -8,7 +8,7 @@
   <table id=headertable width=100%>
  <tr>
   <td align="left"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
-  <td align="center"><h1>PNM UEFA betting system</h1></td>
+  <td align="center"><a href="/" id="home" title="Home"><h1>PNM UEFA betting system</h1></a></td>
   <td align="right"><a href="/"><img width="100em" src="/images/logo.png" alt="logo.png" title="Home"></a></td>
  </tr>
 </table>

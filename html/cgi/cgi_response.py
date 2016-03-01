@@ -186,8 +186,7 @@ def create_betting_table(*args):
     print("""\
             </tbody>
         </table>
-     <div align="center"><input id="submit" type="image" src="/images/submit.png" value="Submit"/></div>
-  </form>"""
+    </form>"""
       )
       
 def create_admin_table(*args):
