@@ -37,6 +37,8 @@ if __name__ == '__main__':
     manager.read_config()
     manager.read_games_list()
     manager.update_games()
-    manager.update_points()
-    #manager.save_database()
+    try:
+        manager.update_points()
+    except TypeError:
+        manager.save_database()
     print_response()
