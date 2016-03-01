@@ -16,7 +16,10 @@ import time
 def create_ranking_table(*args):
     manager = database_manager.BetBase()
     manager.read_config()
-    userlist = manager.get_all_users_info()
+    try:
+        userlist = manager.get_all_users_info()
+    except TypeError:
+        userlist = []
     print("""
     <table border="1" id="keywords" cellspacing="0" cellpadding="0">
     <script type="text/javascript">
@@ -47,8 +50,12 @@ def create_ranking_table(*args):
 def create_detailed_table(*args):
     manager = database_manager.BetBase()
     manager.read_config()
-    userlist = manager.get_all_users_info()
-    userlist = sorted(userlist, key=lambda user: user.get('name', 'z'))
+    try:
+        userlist = manager.get_all_users_info()
+    except TypeError:
+        userlist = []
+    else:
+        userlist = sorted(userlist, key=lambda user: user.get('name', 'z'))
     gameslist = manager.get_all_games_info()
     gameslist = sorted(gameslist, key=lambda game: game.get('date', 'z'))
     print("""
@@ -120,7 +127,10 @@ def create_betting_table(*args):
     gameslist = sorted(gameslist, key=lambda game: game.get('date', 'z'))
     userinfo = None
     if len(args) > 0:
-        userinfo = manager.get_user_info(args[0])
+        try:
+            userinfo = manager.get_user_info(args[0])
+        except AttributeError:
+            pass
         
     print("""
     <form action="/cgi/submit_bet.py" method="post">
