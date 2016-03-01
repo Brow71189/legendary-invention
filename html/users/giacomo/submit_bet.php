@@ -1,1 +1,1 @@
-../submit_bet.php
+/home/pi/legendary-invention/html/users/submit_bet.php

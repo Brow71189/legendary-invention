@@ -29,7 +29,8 @@ if __name__ == '__main__':
         raise OSError(path + ' Does not exist. Please enter a valid path.')
     
     manager = database_manager.BetBase()
-    manager.add_usernode()
+    manager.add_usernode(user)
+    manager.save_database()
     
     userpath = os.path.join(path, user)
     if not os.path.exists(userpath):
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     
     shutil.os.symlink(os.path.join(path, 'personal_betting_table.php'), os.path.join(userpath, 'index.php'))
     shutil.os.symlink(os.path.join(path, 'submit_bet.php'), os.path.join(userpath, 'submit_bet.php'))
-    with open(os.path.join(userpath, '.htacess')) as userfile:
+    with open(os.path.join(userpath, '.htacess'), 'w') as userfile:
         userfile.write('Require user ' + user)
         
-    subprocess.call(['htpasswd', 'legendary.pass', user])
+    subprocess.call(['htpasswd', '/home/pi/legendary.pass', user])

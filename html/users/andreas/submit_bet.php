@@ -1,1 +1,0 @@
-../submit_bet.php
