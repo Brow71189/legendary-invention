@@ -16,7 +16,7 @@ class Lock(object):
         if file is not None:
             file = os.path.normpath(file)
         self.file = file
-        self._lock_expire_time = 3600
+        self._lock_expire_time = 30
 
     def acquire(self, file=None, timeout=5):
         if file is not None:

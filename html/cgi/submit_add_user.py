@@ -12,7 +12,7 @@ import shutil
 import cgi
 import cgitb
 cgitb.enable()
-import hashlib
+import subprocess
 
 
 user_path = '/home/pi/legendary-invention/html/users'
@@ -76,6 +76,10 @@ def main():
     if not password == confirm:
         print_error('Passwords do not match. Please try again.')
         return
+        
+    if not os.path.isfile(htpassword_file):
+        print_error('Htpassword file does not exist. New user was not created.')
+        return
     
     manager = database_manager.BetBase()
     manager.add_usernode(user)
@@ -90,9 +94,7 @@ def main():
     with open(os.path.join(userpath, '.htacess'), 'w') as userfile:
         userfile.write('Require user ' + user)
     
-    with open(htpassword_file, mode='a') as pw_file:
-        m = hashlib.md5(password.encode())
-        pw_file.write('\n' + user + ':' + m.hexdigest())
+    subprocess.call(['htpasswd', '-b', htpassword_file, user, password])
         
     print_response(user)
 
