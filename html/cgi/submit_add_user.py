@@ -16,7 +16,7 @@ import hashlib
 
 
 user_path = '/home/pi/legendary-invention/html/users'
-htpassword_file = ''
+htpassword_file = '/home/pi/legendary.pass'
 
 def print_response(user):
     print("""\
