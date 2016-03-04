@@ -24,6 +24,12 @@
 		<input type="submit" value="Delete this game"/>
 		<input type="text" name="gameid" maxlength="10" style="width: 10em" placeholder="Game ID"/>
 	</form>
+	<form action="/cgi/submit_add_user.py" method="post">
+		<input type="text" name="user" placeholder="Username"/>
+		<input type="password" name="password" placeholder="Password"/>
+		<input type="password" name="confirm" placeholder="Confirm Password"/>
+		<input type="submit" value="Add User"/>
+	</form>
  
 </body>
 </html>
