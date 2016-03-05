@@ -31,7 +31,7 @@ Content-type:text/html\r\n\r\n
     <body>
         Logged in as <?php echo $_SERVER['PHP_AUTH_USER'];?>
     
-        <h3>USER """ + user + """ HAS BEEN SUCCESSFULLY ADDED!</h3>
+        <h3>USER """ + user + """ HAS BEEN SUCCESSFULLY DELETED!</h3>
         <br><br>
         <p>You will be redirected to the admin area in 5 seconds. If not, use the following link:</p>
         <a href="/users/admin/" title="Admin Area">Admin Area</a>
@@ -61,45 +61,36 @@ Content-type:text/html\r\n\r\n
 def main():
     global htpassword_file
     global user_path
-    create_file = False
+    delete_from_htpasswd = True
     user_path = os.path.normpath(user_path)    
     htpassword_file = os.path.normpath(htpassword_file)
 
     form=cgi.FieldStorage()    
     user = form.getfirst('user')
-    password = form.getfirst('password')
-    confirm = form.getfirst('confirm')
 
     if not os.path.isdir(user_path):
         print_error('Path to users folder ' + user_path + ' was not found. New user was not created.')
         return
         
-    if not password == confirm:
-        print_error('Passwords do not match. Please try again.')
-        return
-        
     if not os.path.isfile(htpassword_file):
-        create_file = True
-    
-    manager = database_manager.BetBase()
-    manager.add_usernode(user)
-    manager.save_database()
+        delete_from_htpasswd = False
     
     userpath = os.path.join(user_path, user)
-    if not os.path.exists(userpath):
-        os.makedirs(userpath)
+    if os.path.exists(userpath):
+        os.rmdir(userpath)
     
-    shutil.os.symlink(os.path.join(user_path, 'personal_betting_table.php'), os.path.join(userpath, 'index.php'))
-    shutil.os.symlink(os.path.join(user_path, 'submit_bet.php'), os.path.join(userpath, 'submit_bet.php'))
-    with open(os.path.join(userpath, '.htacess'), 'w') as userfile:
-        userfile.write('Require user ' + user)
-    
-    if create_file:
-        subprocess.call(['htpasswd', '-bc', htpassword_file, user, password])
-    else:
-        subprocess.call(['htpasswd', '-b', htpassword_file, user, password])
+    if delete_from_htpasswd:
+        subprocess.call(['htpasswd', '-D', htpassword_file, user])
         
-    print_response(user)
+    manager = database_manager.BetBase()
+    try:
+        manager.delete_user(user)
+    except RuntimeError:
+        print_error('A user ' + user + ' was not found in the database.')
+    else:
+        print_response(user)
+    finally:
+        manager.save_database()
 
 if __name__ == '__main__':
     main()
