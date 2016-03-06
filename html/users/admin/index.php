@@ -32,7 +32,7 @@
 	</form>
 	<form action="/cgi/submit_delete_user.py" method="post">
 		<input type="text" name="user" placeholder="Username"/>
-		<input type="text" value="Delete User"/>
+		<input type="submit" value="Delete User"/>
 	</form>
  
 </body>
