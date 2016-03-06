@@ -77,8 +77,8 @@ def main():
     
     userpath = os.path.join(user_path, user)
     if os.path.exists(userpath):
-        os.rmdir(userpath)
-    
+        shutil.rmtree(userpath)	
+   
     if delete_from_htpasswd:
         subprocess.call(['htpasswd', '-D', htpassword_file, user])
         
