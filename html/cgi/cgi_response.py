@@ -58,13 +58,12 @@ def create_detailed_table(*args):
         userlist = sorted(userlist, key=lambda user: user.get('name', 'z'))
     gameslist = manager.get_all_games_info()
     gameslist = sorted(gameslist, key=lambda game: game.get('date', 'z'))
-	
-	now = time.strftime(manager.time_format)
-	next_game = None
-	for i in range(len(gameslist)):
-		next_game = gameslist[i].get('date')
-		if now < next_game:
-			break
+    now = time.strftime(manager.time_format)
+    next_game = None
+    for i in range(len(gameslist)):
+    next_game = gameslist[i].get('date')
+        if now < next_game:
+            break
 
     print("""
     <a href="#""" + next_game + """\">Go to next game</a>
