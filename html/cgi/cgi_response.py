@@ -83,7 +83,7 @@ def create_detailed_table(*args):
           </tr>
           </thead>
           <tbody>""")
-    for i in range(len(gameslist)):			
+    for i in range(len(gameslist)):
         print("""\
             <tr id=\"""" + gameslist[i].get('date') + """\">""")
             
