@@ -77,7 +77,7 @@ def create_detailed_table(*args):
         <tbody>""")
     for i in range(len(gameslist)):
         print("""\
-            <tr>""")
+            <tr id=\"""" + time.strftime('%B_%d', time.strptime(gameslist[i].get('date'), manager.time_format)) + """\">""")
             
         if not (i > 0 and gameslist[i].get('date')[:5] == gameslist[i-1].get('date')[:5]):
             rowspan=1
