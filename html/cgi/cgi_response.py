@@ -58,7 +58,16 @@ def create_detailed_table(*args):
         userlist = sorted(userlist, key=lambda user: user.get('name', 'z'))
     gameslist = manager.get_all_games_info()
     gameslist = sorted(gameslist, key=lambda game: game.get('date', 'z'))
+	
+	now = time.strftime(manager.time_format)
+	next_game = None
+	for i in range(len(gameslist)):
+		next_game = gameslist[i].get('date')
+		if now < next_game:
+			break
+
     print("""
+    <a href="#""" + next_game + """\">Go to next game</a>
     <table border="1" id="detailed" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -69,15 +78,15 @@ def create_detailed_table(*args):
     for user in userlist:
         print("""\
                 <th>""" + user.get('name', 'unknown') + """</th>"""
-              )
-              
+              )      
+    
     print("""\
-            </tr>
-        </thead>
-        <tbody>""")
-    for i in range(len(gameslist)):
+          </tr>
+          </thead>
+          <tbody>""")
+    for i in range(len(gameslist)):			
         print("""\
-            <tr id=\"""" + time.strftime('%B_%d', time.strptime(gameslist[i].get('date'), manager.time_format)) + """\">""")
+            <tr id=\"""" + gameslist[i].get('date') + """\">""")
             
         if not (i > 0 and gameslist[i].get('date')[:5] == gameslist[i-1].get('date')[:5]):
             rowspan=1
