@@ -61,7 +61,7 @@ def create_detailed_table(*args):
     now = time.strftime(manager.time_format)
     next_game = None
     for i in range(len(gameslist)):
-    next_game = gameslist[i].get('date')
+        next_game = gameslist[i].get('date')
         if now < next_game:
             break
 
