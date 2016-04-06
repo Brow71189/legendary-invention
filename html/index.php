@@ -28,6 +28,7 @@
 </table>
 
   <h3>RANKING TABLE</h3>
+  <br>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_ranking_table'); ?>
   <h3>DETAILED BETTING TABLE</h3>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_detailed_table'); ?>

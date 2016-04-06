@@ -67,7 +67,7 @@ def create_detailed_table(*args):
             break
 
     print("""
-    <a href="#""" + next_game + """\">Go to next game</a>
+    <a id="jump" href="#""" + next_game + """\"><img width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
     <table border="1" id="detailed" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -140,10 +140,17 @@ def create_betting_table(*args):
             userinfo = manager.get_user_info(args[0])
         except AttributeError:
             pass
-        
+    now = time.strftime(manager.time_format)
+    next_game = None
+    for i in range(len(gameslist)):
+        next_game = gameslist[i].get('date')
+        if now < next_game:
+            break
+    
     print("""
+    <a id="jump" href="#""" + next_game + """\"><img width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
     <form action="/cgi/submit_bet.py" method="post">
-     <div align="center"><input id="submit" type="image" src="/images/submit.png" value="Submit"/></div>
+     <input id="submit" type="image" src="/images/submit.png" value="Submit"/>
      <input type="hidden" name="user" value=\"""" + args[0] + """\">
       <table border="1" id="betting" cellspacing="0" cellpadding="0">
         <thead>
@@ -169,7 +176,7 @@ def create_betting_table(*args):
             disabled = 'disabled'
                 
         print("""\
-            <tr>""")
+            <tr id=\"""" + gameslist[i].get('date') + """\">""")
             
         if not (i > 0 and gameslist[i].get('date')[:5] == gameslist[i-1].get('date')[:5]):
             rowspan=1
@@ -216,10 +223,17 @@ def create_admin_table(*args):
 #    userinfo = None
 #    if len(args) > 0:
 #        userinfo = manager.get_user_info(args[0])
-        
+    now = time.strftime(manager.time_format)
+    next_game = None
+    for i in range(len(gameslist)):
+        next_game = gameslist[i].get('date')
+        if now < next_game:
+            break
+    
     print("""
+    <a id="jump" href="#""" + next_game + """\"><img width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
     <form action="/cgi/submit_game_results.py" method="post">
-     <input type="submit" value="Submit"/>
+     <input id="submitres" type="image" src="/images/submitres.png" value="Submit"/>
       <table border="1" id="betting" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -244,7 +258,7 @@ def create_admin_table(*args):
 #            disabled = 'disabled'
                 
         print("""\
-            <tr>""")
+            <tr id=\"""" + gameslist[i].get('date') + """\">""")
             
         if not (i > 0 and gameslist[i].get('date')[:5] == gameslist[i-1].get('date')[:5]):
             rowspan=1

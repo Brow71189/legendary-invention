@@ -24,6 +24,7 @@ body {
   padding: 22px 10px;
   padding-bottom: 55px;
   background-color:#d9d9d9;
+  /*background-color:white;*/
 }
 
 ::selection { background: #5f74a0; color: #fff; }
@@ -207,4 +208,22 @@ vertical-align:middle;
 width:13em;
 position: fixed;
 right:5%;
+top:20em;
 }
+
+#submitres {
+width:13em;
+position: fixed;
+right:5%;
+top:20em;
+}
+
+
+/**
+#jump {
+position: fixed;
+left: 5%;
+bottom: 30%;
+**/
+}
+
