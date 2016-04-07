@@ -19,10 +19,10 @@
 <br>
 <table width=100%>
  <tr>
-  <td align="left"><a href="rules.php" title="See betting rules">Betting rules</a></td>
+  <td align="left"><a id="small_link" href="rules.php" title="See betting rules">betting rules</a></td>
   <td align="right">
    <a href="/users/"><img width="34em" src="/images/lock.png" alt="lock.png" title="Log in"></a>
-   <a href="/users/" title="Log in">start betting!</a>
+   <a id="small_link" href="/users/" title="Log in">start betting!</a>
   </td>
  </tr>
 </table>

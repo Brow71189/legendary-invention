@@ -80,6 +80,24 @@ color: white;
 text-decoration:none;
 }
 
+
+#small_link {
+    font-size: 1.5em;
+}
+
+a:link, a:visited {
+    text-decoration-line: none;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    font-family: 'Indie Flower';
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
 /** page structure
 #wrapper {
   display: block;

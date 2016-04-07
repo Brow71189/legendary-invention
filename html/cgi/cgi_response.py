@@ -59,7 +59,7 @@ def create_detailed_table(*args):
     gameslist = manager.get_all_games_info()
     gameslist = sorted(gameslist, key=lambda game: game.get('date', 'z'))
     now = time.strftime(manager.time_format)
-    #now="06-16T17:13"
+    #now="08-16T17:13"
     next_game = None
     for i in range(len(gameslist)):
         next_game = gameslist[i].get('date')
