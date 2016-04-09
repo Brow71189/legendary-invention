@@ -192,12 +192,19 @@ class BetBase(object):
     def _update_ranks(self):
         users = self.database_tree.getroot().find('users')
         sortedusers = sorted(users, key=lambda usernode: int(usernode.findtext('points', default=0)), reverse=True)
+        counter = 1
         for i in range(len(sortedusers)):
             rank = sortedusers[i].find('rank')
             if rank is None:
                 rank = ElementTree.Element('rank')
                 sortedusers[i].append(rank)
-            rank.text = str(i+1)
+            if i == 0:
+                rank.text = str(counter)
+            elif sortedusers[i].findtext('points', default='0') == sortedusers[i-1].fintext('points', default='0'):
+                rank.text = str(counter)
+            else:
+                counter = i+1
+                rank.text = str(counter)
 
     def add_game_result(self, score1, score2, *game):
         gamenode = self.get_gamenode(*game, writeable=True)
