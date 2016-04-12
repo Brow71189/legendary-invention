@@ -4,8 +4,9 @@
 4) copy legendary.pass to home folder
 5) set right permission for html folder (755)
 6) sudo apt-get install php5 libapache2-mod-php5 (and test if it's running with: a2query -m php5, otherwise sudo a2enmod php5, and restart apache)
-7)sudo a2enmod rewrite
+7) sudo a2enmod rewrite
 8) right permissions for password file
+9) Add "Allow Override All" to server root directory (either in apache2.conf or sites-availab√le/default)
 
 
 THINGS THAT MIGHT DEPEND ON SERVER:

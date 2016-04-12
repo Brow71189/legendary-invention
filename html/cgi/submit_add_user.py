@@ -15,7 +15,7 @@ cgitb.enable()
 import subprocess
 
 
-user_path = '/home/pi/legendary-invention/html/users'
+user_path = '/home/pi/git/legendary-invention/html/users'
 htpassword_file = '/home/pi/legendary.pass'
 
 def print_response(user):
@@ -90,7 +90,6 @@ def main():
         os.makedirs(userpath)
     
     shutil.os.symlink(os.path.join(user_path, 'personal_betting_table.php'), os.path.join(userpath, 'index.php'))
-    shutil.os.symlink(os.path.join(user_path, 'submit_bet.php'), os.path.join(userpath, 'submit_bet.php'))
     with open(os.path.join(userpath, '.htacess'), 'w') as userfile:
         userfile.write('Require user ' + user)
     
