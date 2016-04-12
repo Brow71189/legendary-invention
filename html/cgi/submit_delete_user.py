@@ -67,7 +67,7 @@ def main():
     user = form.getfirst('user')
 
     if not os.path.isdir(user_path):
-        print_error('Path to users folder ' + user_path + ' was not found. New user was not created.')
+        print_error('Path to users folder ' + user_path + ' was not found. User was not deleted.')
         return
         
     if not os.path.isfile(htpassword_file):

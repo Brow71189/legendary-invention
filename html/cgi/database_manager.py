@@ -390,7 +390,7 @@ class BetBase(object):
             self.database_tree.getroot().append(users)
         usernode = users.find(name)
         if usernode is not None:
-            raise RuntimeError('A user ' + name + 'exists already in the database.')
+            raise RuntimeError('A user ' + name + ' exists already in the database.')
         usernode = ElementTree.Element(name)
         users.append(usernode)
 
