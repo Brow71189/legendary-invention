@@ -67,8 +67,8 @@ def create_detailed_table(*args):
             break
 
     print("""
-    <a id="jump" href="#""" + next_game +
-    """\"><img width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
+    <a href="#""" + next_game +
+    """\"><img id="jump" width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
     <table border="1" id="detailed" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -149,8 +149,8 @@ def create_betting_table(*args):
             break
     
     print("""
-    <a id="jump" href="#""" + next_game +
-    """\"><img width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
+    <a href="#""" + next_game +
+    """\"><img id="jump" width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
     <form action="/cgi/submit_bet.py" method="post">
      <input id="submit" type="image" src="/images/submit.png" value="Submit"/>
      <input type="hidden" name="user" value=\"""" + args[0] + """\">
@@ -233,8 +233,8 @@ def create_admin_table(*args):
             break
     
     print("""
-    <a id="jump" href="#""" + next_game +
-    """\"><img width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
+    <a href="#""" + next_game +
+    """\"><img id="jump" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
     <form action="/cgi/submit_game_results.py" method="post">
      <input id="submitres" type="image" src="/images/submitres.png" value="Submit"/>
       <table border="1" id="betting" cellspacing="0" cellpadding="0">

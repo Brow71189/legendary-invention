@@ -202,7 +202,7 @@ class BetBase(object):
                 sortedusers[i].append(rank)
             if i == 0:
                 rank.text = str(counter)
-            elif sortedusers[i].findtext('points', default='0') == sortedusers[i-1].fintext('points', default='0'):
+            elif sortedusers[i].findtext('points', default='0') == sortedusers[i-1].findtext('points', default='0'):
                 rank.text = str(counter)
             else:
                 counter = i+1

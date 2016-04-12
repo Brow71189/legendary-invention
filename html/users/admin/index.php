@@ -4,6 +4,7 @@
   <title>Legendary Invention</title>
   <link rel="stylesheet" href="/legend.css" type="text/css">
 </head>
+<body>
 <div id="header">
   <table id=headertable width=100%>
  <tr>

@@ -223,25 +223,41 @@ vertical-align:middle;
 }
 
 #submit {
-width:13em;
+width: 13em;
 position: fixed;
 right:5%;
 top:20em;
 }
 
 #submitres {
-width:13em;
+width: 13em;
 position: fixed;
 right:5%;
 top:20em;
 }
 
+#submit:hover {
+border-style: solid;
+border-width: 3px;
+border-color: darkgrey;
+}
 
-/**
+#submitres:hover {
+border-style: solid;
+border-width: 3px;
+border-color: darkgrey;
+top: 50%;
+}
+
 #jump {
-position: fixed;
-left: 5%;
-bottom: 30%;
-**/
+position: absolute;
+width: 12em;
+padding: 0px 0px 0px 0px;
+}
+
+#jump:hover {
+border-style: solid;
+border-width: 3px;
+border-color: darkgrey;
 }
 
