@@ -82,6 +82,8 @@ class BetBase(object):
         self.games = []
         self._is_readonly = True
         self.quiet = kwargs.get('quiet', False)
+        self.user_path = 'users'
+        self.htpassword_file = 'legendary.pass'
 
     def read_config(self):
         try:

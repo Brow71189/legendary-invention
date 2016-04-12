@@ -15,9 +15,6 @@ cgitb.enable()
 import subprocess
 
 
-user_path = '/home/pi/legendary-invention/html/users'
-htpassword_file = '/home/pi/legendary.pass'
-
 def print_response(user):
     print("""\
 Content-type:text/html\r\n\r\n
@@ -59,11 +56,12 @@ Content-type:text/html\r\n\r\n
 </html>""")
 
 def main():
-    global htpassword_file
-    global user_path
     delete_from_htpasswd = True
-    user_path = os.path.normpath(user_path)    
-    htpassword_file = os.path.normpath(htpassword_file)
+    manager = database_manager.BetBase()
+    manager.read_config()
+    
+    user_path = os.path.normpath(manager.user_path)    
+    htpassword_file = os.path.normpath(manager.htpassword_file)
 
     form=cgi.FieldStorage()    
     user = form.getfirst('user')
@@ -82,7 +80,6 @@ def main():
     if delete_from_htpasswd:
         subprocess.call(['htpasswd', '-D', htpassword_file, user])
         
-    manager = database_manager.BetBase()
     try:
         manager.delete_user(user)
     except RuntimeError:

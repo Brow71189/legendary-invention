@@ -30,10 +30,11 @@
 		<input type="password" name="confirm" placeholder="Confirm Password"/>
 		<input type="submit" value="Add User"/>
 	</form>
-	<form action="/cgi/submit_delete_user.py" method="post">
-		<input type="text" name="user" placeholder="Username"/>
+	<form action="/cgi/submit_delete_user.py" method="post" id="delete_user">
+		<!--<input type="text" name="user" placeholder="Username"/>-->
 		<input type="submit" value="Delete User"/>
 	</form>
+	<?php system(dirname(__FILE__).'/../../cgi/cgi_response.py'.'-f create_user_select');?>
  
 </body>
 </html>

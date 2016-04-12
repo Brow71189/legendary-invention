@@ -15,9 +15,6 @@ cgitb.enable()
 import subprocess
 
 
-user_path = '/home/pi/git/legendary-invention/html/users'
-htpassword_file = '/home/pi/legendary.pass'
-
 def print_response(user):
     print("""\
 Content-type:text/html\r\n\r\n
@@ -59,11 +56,12 @@ Content-type:text/html\r\n\r\n
 </html>""")
 
 def main():
-    global htpassword_file
-    global user_path
     create_file = False
-    user_path = os.path.normpath(user_path)    
-    htpassword_file = os.path.normpath(htpassword_file)
+    manager = database_manager.BetBase()
+    manager.read_config()
+    
+    user_path = os.path.normpath(manager.user_path)    
+    htpassword_file = os.path.normpath(manager.htpassword_file)
 
     form=cgi.FieldStorage()    
     user = form.getfirst('user')
@@ -81,7 +79,6 @@ def main():
     if not os.path.isfile(htpassword_file):
         create_file = True
     
-    manager = database_manager.BetBase()
     manager.add_usernode(user)
     manager.save_database()
     
