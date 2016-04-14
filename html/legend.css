@@ -262,3 +262,7 @@ border-width: 3px;
 border-color: darkgrey;
 }
 
+#impressum {
+position: absolute;
+right: 2em;
+}
