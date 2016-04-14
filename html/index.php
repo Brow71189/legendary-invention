@@ -33,5 +33,6 @@
   <h3>DETAILED BETTING TABLE</h3>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_detailed_table'); ?>
   <a href="/users/admin/" title="Admin Area">Admin Area</a>
+  <a align="right" href="/impressum.html" title="Impressum">Impressum</a>
 </body>
 </html>
