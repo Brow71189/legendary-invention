@@ -117,11 +117,12 @@ def create_detailed_table(*args):
         for user in userlist:
             if not user.get('tips') or not user['tips'].get(gameslist[i]['id']):
                 print("""\
-                <td> - </td>""")
+                <td class="none"> - </td>""")
             else:
                 print("""\
-                <td>""" + user['tips'][gameslist[i]['id']].get('score1', '') + """-""" +
-                          user['tips'][gameslist[i]['id']].get('score2', '') + """</td>"""
+                <td class=\"""" + user['tips'][gameslist[i]['id']].attrib.get('color_class', 'none') + """>""" +
+                      user['tips'][gameslist[i]['id']].get('score1', '') + """-""" +
+                      user['tips'][gameslist[i]['id']].get('score2', '') + """</td>"""
                     )
         print("""\
             </tr>""")

@@ -179,8 +179,12 @@ class BetBase(object):
                 gamescore2 = int(game.get('score2'))
                 if tipscore1 == gamescore1 and tipscore2 == gamescore2:
                     points += 3
+                    tip.attrib.set('color_class', 'green')
                 elif sign(tipscore1 - tipscore2) == sign(gamescore1 - gamescore2):
                     points += 1
+                    tip.attrib.set('color_class', 'yellow')
+                else:
+                    tip.attrib.set('color_class', 'red')
 
             pointsnode = user.find('points')
             if pointsnode is None:
