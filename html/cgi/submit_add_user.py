@@ -67,7 +67,20 @@ def main():
     user = form.getfirst('user')
     password = form.getfirst('password')
     confirm = form.getfirst('confirm')
+    
+    if user.lower().startswith('xml'):
+        print_error('Username must not start with "xml"!')
+        return
 
+    if user[0] in '0123456789':
+        print_error('Username must not start with a number!')
+        return
+        
+    for char in user:
+        if not char in 'qwertzuiopasdfghjklyxcvbnmQWERTZUIOPASDFGHJKLYXCVBNM1234567890':
+            print_error('Invalid character in username. Valid characters are only letters and numbers.')
+            return
+            
     if not os.path.isdir(user_path):
         print_error('Path to users folder ' + user_path + ' was not found. New user was not created.')
         return
