@@ -35,7 +35,7 @@
 		<input type="text" name="user" placeholder="Username"/>
 		<input type="submit" value="Delete User"/>
 	</form>
-	<?php system(dirname(__FILE__).'/../../cgi/cgi_response.py'.'-f create_user_select');?>
+	<?php system(dirname(__FILE__).'/../../cgi/cgi_response.py '.'-f create_user_select');?>
  
 </body>
 </html>
