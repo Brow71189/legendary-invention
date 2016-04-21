@@ -228,17 +228,18 @@ class BetBase(object):
                              ' score team1 and score team2. 6 arguments must be month, day, team1, team2, score team1' +
                              ' and score team2')
 
-        tipnode = ElementTree.Element(gameid, attrib={'score1': str(tip[-2]), 'score2': str(tip[-1])})
         tips = usernode.find('tips')
         if tips is None:
             tips = ElementTree.Element('tips')
             usernode.append(tips)
 
-        oldtip = tips.find(gameid)
-        if oldtip is not None:
-            tips.remove(oldtip)
-
-        tips.append(tipnode)
+        tipnode = tips.find(gameid)
+        if tipnode is None:
+            tipnode = ElementTree.Element(gameid, attrib={'score1': str(tip[-2]), 'score2': str(tip[-1])})
+            tips.append(tipnode)
+        else:
+            tipnode.set('score1', str(tip[-2]))
+            tipnode.set('score2', str(tip[-1]))
 
     def get_usernode(self, name, **kwargs):
         if (self.database_tree is None or
