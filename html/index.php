@@ -32,6 +32,42 @@
   <br>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_ranking_table'); ?>
   <h3>DETAILED BETTING TABLE</h3>
+   <table>
+    <tr>
+     <td>
+      <svg>
+       <rect id="green-box" width="1em" height="1em">
+      </svg>
+     </td>
+     <td>
+      <pre> = 3 points   </pre>
+     </td>
+     <td>
+      <svg>
+       <rect id="yellow-box" width="1em" height="1em">
+      </svg>
+     </td>
+     <td>
+      <pre> = 2 points   </pre>
+     </td>
+     <td>
+      <svg>
+       <rect id="orange-box" width="1em" height="1em">
+      </svg>
+     </td>
+     <td>
+      <pre> = 1 point   </pre>
+     </td>
+     <td>
+      <svg>
+       <rect id="red-box" width="1em" height="1em">
+      </svg>
+     </td>
+     <td>
+      <pre> = 0 points   </pre>
+     </td>
+
+  <br>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_detailed_table'); ?>
   <a href="/users/admin/" title="Admin Area">Admin Area</a>
   <a id="impressum" href="/impressum.html" title="Impressum">Impressum</a>

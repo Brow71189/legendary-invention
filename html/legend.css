@@ -286,6 +286,35 @@ td.green {
 background-color: #ccffcc;
 }
 
+svg {
+width: 1em;
+height: 1em;
+}
+
+rect {
+width: 1em;
+height: 1em;
+stroke-width: 2px;
+stroke: black;
+}
+
+#green-box {
+fill: #ccffcc;
+}
+
+#yellow-box {
+fill: #ffffcc;
+}
+
+#orange-box {
+fill: #ffdab3;
+}
+
+#red-box {
+fill: #ffcccc;
+}
+
+
 #detailed td.team {
 width: 3em;
 border: 0;
