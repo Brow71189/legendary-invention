@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>PNM Betting</title>
-  <link rel="icon" href="/logo.ico" type="image/x-icon">
+  <link rel="icon" href="/images/logo.gif" type="image/gif">
   <link rel="stylesheet" href="/legend.css" type="text/css">
   <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
   <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>  
