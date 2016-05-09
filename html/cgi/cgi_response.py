@@ -69,7 +69,8 @@ def create_detailed_table(*args):
     print("""
     <a href="#""" + next_game +
     """\"><img id="jump" width="160em" src="/images/jump.png" alt="jump.png" title="Jump to next game!"></a>
-    <table border="1" id="detailed" cellspacing="0" cellpadding="0">
+    <div class="detailed">
+    <table id="detailed">
         <thead>
             <tr>
                 <th>Day</th>
@@ -104,7 +105,7 @@ def create_detailed_table(*args):
                 time.strftime('%H:%M', time.strptime(gameslist[i].get('date'), manager.time_format)) +
                 """</td>
                 <td align="center">
-                    <table border="0" cellspacing="0" cellpadding="0">
+                    <table class="match">
                         <tr align="center">
                             <td class="flag">""" + """<img width="25em" src="/images/flags/""" +
                                 gameslist[i].get('team1', '') + """.png" title=\"""" + gameslist[i].get('name1', '') +
@@ -136,7 +137,8 @@ def create_detailed_table(*args):
             </tr>""")
     print("""\
             </tbody>
-        </table>"""
+        </table>
+    </div>"""
         )
 
 def create_betting_table(*args):

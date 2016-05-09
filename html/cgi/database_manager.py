@@ -170,9 +170,9 @@ class BetBase(object):
                 continue
             for tip in tips:
                 game = games.find(tip.tag)
-                if (game is None or game.get('date', default='z') > currenttime or game.get('score1') is None or
-                        game.get('score2') is None or tip.get('score1') is None or tip.get('score2') is None):
-                    continue
+                if (game is None or game.get('score1') is None or
+                         game.get('score2') is None or tip.get('score1') is None):
+                     continue
                 tipscore1 = int(tip.get('score1'))
                 tipscore2 = int(tip.get('score2'))
                 gamescore1 = int(game.get('score1'))
