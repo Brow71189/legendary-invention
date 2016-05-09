@@ -33,7 +33,7 @@ def process_input(form):
             except:
                 score2 = None
         if (score1 is None or score2 is None or
-            time.strftime(manager.time_format) > manager.get_game_info(game).get('date')):
+            time.strftime(manager.time_format) < manager.get_game_info(game).get('date')):
             continue
         
         manager.add_game_result(score1, score2, game)
