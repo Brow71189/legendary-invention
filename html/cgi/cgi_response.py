@@ -106,13 +106,15 @@ def create_detailed_table(*args):
                 <td align="center">
                     <table border="0" cellspacing="0" cellpadding="0">
                         <tr align="center">
-                            <td>""" + """<img width="25em" src="/images/flags/""" + gameslist[i].get('team1', '') +
-                                """.png" title=\"""" + gameslist[i].get('name1', '') + """\"> </td>
-                            <td>""" + gameslist[i].get('team1', '') + """</td>
-                            <td> - </td>
-                            <td>""" + gameslist[i].get('team2', '') + """</td>
-                            <td>""" + """<img width="25em" src="/images/flags/""" + gameslist[i].get('team2', '') +
-                                """.png" title=\"""" + gameslist[i].get('name2', '') + """\"> </td>
+                            <td class="flag">""" + """<img width="25em" src="/images/flags/""" +
+                                gameslist[i].get('team1', '') + """.png" title=\"""" + gameslist[i].get('name1', '') +
+                                """\"> </td>
+                            <td class="team">""" + gameslist[i].get('team1', '') + """</td>
+                            <td class="separator"> - </td>
+                            <td class="team">""" + gameslist[i].get('team2', '') + """</td>
+                            <td class="flag">""" + """<img width="25em" src="/images/flags/""" +
+                                gameslist[i].get('team2', '') + """.png" title=\"""" + gameslist[i].get('name2', '') +
+                                """\"> </td>
                         </tr>
                     </table>
                 </td>

@@ -284,8 +284,15 @@ td.yellow {
 background-color: #ffffcc;
 }
 
+td.orange {
+background-color: #ffcc99;
+}
 td.green {
 background-color: #ccffcc;
+}
+
+td.team {
+width: 4em;
 }
 #rules {   
   /**font-family: 'Indie Flower';**/
