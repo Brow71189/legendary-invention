@@ -178,10 +178,10 @@ class BetBase(object):
                 gamescore1 = int(game.get('score1'))
                 gamescore2 = int(game.get('score2'))
                 if tipscore1 == gamescore1 and tipscore2 == gamescore2:
-                    points += 3
+                    points += 5
                     tip.set('color_class', 'green')
                 elif tipscore1 - tipscore2 == gamescore1 - gamescore2:
-                    points += 2
+                    points += 3
                     tip.set('color_class', 'yellow')
                 elif sign(tipscore1 - tipscore2) == sign(gamescore1 - gamescore2):
                     points += 1
