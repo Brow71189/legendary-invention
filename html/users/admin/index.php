@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>PNM Betting</title>
-  <link rel="icon" href="/images/logo.ico" type="image/x-icon">
+  <link rel="icon" href="/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="/legend.css" type="text/css">
 </head>
 <body>
