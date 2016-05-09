@@ -103,7 +103,7 @@ a:link, a:visited {
 
 a:hover {
     text-decoration: none;
-    color: white;
+    color: #9999ff;
 }
 
 /** page structure
