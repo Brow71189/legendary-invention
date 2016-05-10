@@ -32,11 +32,12 @@
   <br>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_ranking_table'); ?>
   <h3>DETAILED BETTING TABLE</h3>
+  <div align="center" style="height: 2em;">
    <table>
     <tr>
      <td>
       <svg>
-       <rect id="green-box" width="1em" height="1em">
+       <rect id="green-box" width="1em" height="1em"/>
       </svg>
      </td>
      <td>
@@ -44,7 +45,7 @@
      </td>
      <td>
       <svg>
-       <rect id="yellow-box" width="1em" height="1em">
+       <rect id="yellow-box" width="1em" height="1em"/>
       </svg>
      </td>
      <td>
@@ -52,7 +53,7 @@
      </td>
      <td>
       <svg>
-       <rect id="orange-box" width="1em" height="1em">
+       <rect id="orange-box" width="1em" height="1em"/>
       </svg>
      </td>
      <td>
@@ -60,13 +61,14 @@
      </td>
      <td>
       <svg>
-       <rect id="red-box" width="1em" height="1em">
+       <rect id="red-box" width="1em" height="1em"/>
       </svg>
      </td>
      <td>
       <pre> = 0 points   </pre>
      </td>
-
+  </table>
+  </div>
   <br>
   <?php system(dirname(__FILE__).'/cgi/cgi_response.py '.'-f create_detailed_table'); ?>
   <a href="/users/admin/" title="Admin Area">Admin Area</a>
