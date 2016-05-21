@@ -41,7 +41,7 @@
       </svg>
      </td>
      <td>
-      <pre> = 3 points   </pre>
+      <pre> = 5 points   </pre>
      </td>
      <td>
       <svg>
@@ -49,7 +49,7 @@
       </svg>
      </td>
      <td>
-      <pre> = 2 points   </pre>
+      <pre> = 3 points   </pre>
      </td>
      <td>
       <svg>
