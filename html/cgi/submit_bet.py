@@ -26,11 +26,13 @@ def process_input(form):
             score1 = form[tip].value
             try:
                 score1 = int(score1)
+                assert score1 >= 0
             except:
                 score1 = None
             score2 = form.getfirst('score2_' + game)
             try:
                 score2 = int(score2)
+                assert score2 >= 0
             except:
                 score2 = None
         if (score1 is None or score2 is None or
