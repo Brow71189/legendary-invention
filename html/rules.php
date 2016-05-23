@@ -34,7 +34,7 @@
    <li>correct result will assign 5 points (e.g. result: 3-2, bet: 3-2 &#8594; 5 points)</li>
    <li>correct outcome and correct goal difference will assign 3 points (e.g. result: 3-2, bet: 2-1 &#8594; 3 points)</li>
    <li>correct outcome will assign 1 point (e.g. result: 3-2, bet: 2-0 &#8594; 1 point)</li>
-   <li>wrong outcome or no bet will assign 0 points (e.g. result: 3-2, bet: 0-1 &#8594; 0 point)</li>
+   <li>wrong outcome or no bet will assign 0 points (e.g. result: 3-2, bet: 0-1 &#8594; 0 points)</li>
   </ul>
   <br>
  Obviously enough, at the end of the championship the user with most points wins.
