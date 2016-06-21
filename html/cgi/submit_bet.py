@@ -50,7 +50,7 @@ Content-type:text/html\r\n\r\n
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Legendary Invention</title>
+        <title>PNM Betting</title>
         <link rel="stylesheet" href="/legend.css" type="text/css">
     </head>
     <body>
