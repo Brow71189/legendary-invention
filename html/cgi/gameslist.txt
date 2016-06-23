@@ -37,3 +37,11 @@
 06-22T18:00	HUN	POR	Hungary	Portugal
 06-22T21:00	SWE	BEL	Sweden	Belgium
 06-22T21:00	ITA	IRL	Italy	Irland
+06-25T15:00	SUI	POL	Switzerland	Poland
+06-25T18:00	WAL	NIR	Wales	Northern-Irland
+06-25T21:00	CRO	POR	Croatia	Portugal
+06-26T15:00	FRA	IRL	France	Irland
+06-26T18:00	GER	SVK	Germany	Slovakia
+06-26T21:00	HUN	BEL	Hungary	Belgium
+06-27T18:00	ITA	ESP	Italy	Spain
+06-27T21:00	ENG	ISL	England	Iceland
