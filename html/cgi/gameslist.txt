@@ -45,3 +45,7 @@
 06-26T21:00	HUN	BEL	Hungary	Belgium
 06-27T18:00	ITA	ESP	Italy	Spain
 06-27T21:00	ENG	ISL	England	Iceland
+06-30T21:00	POL	POR	Poland Portugal
+07-01T21:00	WAL	BEL	Wales	Belgium
+07-02T21:00	GER	ITA	Germany	Italy
+07-03T21:00	FRA	ISL	France	Iceland
