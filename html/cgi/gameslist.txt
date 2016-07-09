@@ -49,3 +49,6 @@
 07-01T21:00	WAL	BEL	Wales	Belgium
 07-02T21:00	GER	ITA	Germany	Italy
 07-03T21:00	FRA	ISL	France	Iceland
+07-06T21:00	POR	WAL	Portugal	Wales
+07-07T21:00	GER	FRA	Germany	France
+07-10T21:00	FRA	POR	France	Portugal
